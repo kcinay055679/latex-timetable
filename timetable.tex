@@ -46,9 +46,9 @@
 \newcounter{currentPlannedHours}
 \setcounter{currentPlannedHours}{0}
 
-% \makeatletter % if not in package code
 
 \newcommand{\task}[3]{
+  \\\hhline{*{\headerColsAmount}{-}}
   #1
   &
   % \number\thecurrentPlannedHours
@@ -61,7 +61,6 @@
   \addtocounter{currentPlannedHours}{\number#2}
   % \hhline{*{10}{-}>{\arrayrulecolor[HTML]{BBDAFF}}->{\arrayrulecolor{black}}*{8}{-}}
 }
-% \makeatother
 
 
 \begin{document}
@@ -92,14 +91,9 @@ Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{7}{Sc!{\bluevrule}}
 
 \hhline{*{\headerColsAmount}{-}}
 \aDay{}
-\\
-\hhline{*{\headerColsAmount}{-}}
+
 \task{test}{1}{2}
-\\
-\hhline{*{\headerColsAmount}{-}}
 \task{123}{1}{2}
-\\
-\hhline{*{\headerColsAmount}{-}}
 \task{456}{2}{2}
 % \\
 % \hhline{*{10}{-}>{\arrayrulecolor[HTML]{BBDAFF}}->{\arrayrulecolor{black}}*{8}{-}}
