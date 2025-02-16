@@ -1,0 +1,151 @@
+\documentclass[a4paper,11pt,landscape]{book}
+\usepackage[inner=0.3in,outer=0.3in,tmargin=1in,bmargin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage{multirow}
+\usepackage[table,xcdraw,  x11names]{xcolor}
+\usepackage{makecell, hhline} 
+\usepackage{tabstackengine} 
+\usepackage{etex} 
+\usepackage{pgffor}
+\usepackage{expl3}
+
+\setstackEOL{\\}
+\renewcommand\theadset{\cellcolor[HTML]{BBDAFF}\renewcommand\arraystretch{1.5}}
+\renewcommand\theadfont{\normalsize\bfseries\cellcolor[HTML]{BBDAFF}\color{IndianRed3}}
+\renewcommand\cellset{\mdseries}
+\usepackage{cellspace}
+\setlength\cellspacetoplimit{1ex}
+\setlength\cellspacebottomlimit{1ex}
+\def\thickvrule{\vrule width 1.5mm}
+\def\bluevrule{\color[HTML]{BBDAFF}\vrule width1pt}
+
+
+\newcommand{\hoursPerDay}{8}
+\newcommand{\minutesPerHour}{60}
+
+\newcommand{\blockSize}{30}
+\newcommand{\blockAmount}{\number\numexpr \number\hoursPerDay* \number\minutesPerHour/\number\blockSize\relax}
+
+
+\ExplSyntaxOn{}
+\cs_new_eq:NN \Repeat\prg_replicate:nn
+\ExplSyntaxOff{}
+
+\newcommand{\aDay}[1]{%
+  \Repeat{\blockAmount}{\makecell{\blockSize} &}
+}
+
+\begin{document}
+\setlength\Lstackgap{1cm}
+\pagenumbering{gobble}
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+\centering\sffamily\bfseries
+\setlength\arrayrulewidth{1.5mm}
+\newcommand\SsHh{\multicolumn{1}{Sc}{ \cellcolor[HTML]{F8A102}\begin{tabular}[c]{@{}c@{}}Sssss\\ Hhhh\end{tabular}}}
+\newcommand\Cc{\multicolumn{2}{Sc}{\cellcolor[HTML]{3531FF}{\color[HTML]{FFFFFF}Cc}}}
+\newcommand\Greencells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{009901}#2}}
+\newcommand\Lightbluecells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{34CDF9}#2}}
+\newcommand\emptycells[1]{\multicolumn{#1}{Sc}{}}
+\label{my-label}
+\begin{tabular}{!{\thickvrule}Sc!{\thickvrule} *{8}{Sc!{\bluevrule}}
+Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{7}{Sc!{\bluevrule}}Sc!{\thickvrule}}
+\hhline{*{\blockAmount}{-}}
+\multicolumn{\numexpr\blockAmount+1\relax}{!{\thickvrule}Sc!{\thickvrule}}{\cellcolor[HTML]{FFCC67}{\Huge Student Meeting Times and Schedule : Jan--July 2016}}\\
+
+
+
+
+
+
+\hhline{*{\numexpr\blockAmount+1\relax}{-}}
+&
+\aDay
+
+\\
+\hhline{*{\numexpr\blockAmount+1\relax}{-}}
+
+Mon
+&\emptycells{2} & \Greencells{3}{Aa Rr}%
+& \SsHh
+& \multicolumn{3}{c}{\cellcolor[HTML]{FE0000}{\color{white}\begin{tabular}[c]{@{}c@{}}GGGGGGGGG \\ MMMMMM\end{tabular}}}
+& \cellcolor[HTML]{BBDAFF}
+& \multicolumn{2}{c}{\cellcolor[HTML]{34CDF9}\begin{tabular}[c]{@{}c@{}}Sssss \&\\ Mmmm\end{tabular}}
+& \SsHh%
+& \Greencells{2}{Pp Nn}
+& \Greencells{2}{Aa Mm} 
+&
+\\
+\hhline{*{10}{-}>{\arrayrulecolor[HTML]{BBDAFF}}->{\arrayrulecolor{black}}*{8}{-}}
+
+Tue
+& \multicolumn{3}{c}{\cellcolor[HTML]{FFFC9E}\color{IndianRed3}E 2 : Class} 
+& \SsHh
+& \Greencells{3}{Cc Mm} 
+& \Lightbluecells{2}{Aa Dd}
+& \cellcolor[HTML]{BBDAFF}
+& \emptycells{2}
+& \SsHh
+& \Greencells{2}{Aa Mm}
+&  \emptycells{2}  & 
+\\
+\hhline{*{10}{-}>{\arrayrulecolor[HTML]{BBDAFF}}->{\arrayrulecolor{black}}*{8}{-}}
+
+Wed
+&  \emptycells{2}
+& \Greencells{3}{Pp Gg}
+& \SsHh
+& \multicolumn{1}{c}{\cellcolor[HTML]{340096}{\color{white}Tt Kk}}
+&  \emptycells{1} 
+& \multicolumn{1}{c}{\cellcolor[HTML]{340096}{\color{white}Hh Ss}}
+& \cellcolor[HTML]{BBDAFF}
+& \Cc
+&\SsHh
+& \Cc
+&  \emptycells{2} &
+\\
+\hhline{*{10}{-}>{\arrayrulecolor[HTML]{BBDAFF}}->{\arrayrulecolor{black}}*{8}{-}}
+
+Thu
+& \multicolumn{3}{c}{\cellcolor[HTML]{FFFC9E}\color{IndianRed3}E 2 : Class}
+& \SsHh
+& \Greencells{3}{Ss Rr}
+& \multicolumn{1}{c}{\cellcolor[HTML]{F8A102}\begin{tabular}[c]{@{}c@{}}Sssss\\ Hhhh\end{tabular}}
+& \emptycells{1}
+& \cellcolor[HTML]{BBDAFF}
+& \multicolumn{2}{c}{\cellcolor[HTML]{34CDF9}\begin{tabular}[c]{@{}c@{}}Vv \&\\ Ss\end{tabular}}
+& \Cc
+&  \emptycells{3} &
+\\
+\hhline{*{10}{-}>{\arrayrulecolor[HTML]{BBDAFF}}->{\arrayrulecolor{black}}*{8}{-}}
+
+Fri
+&  \emptycells{3}
+& \Lightbluecells{1}{Aa   Jj}
+& \Lightbluecells{1}{Ss Jj}
+& \multicolumn{2}{Sc}{\cellcolor[HTML]{F8FF00}\begin{tabular}[c]{@{}c@{}}Ff\\ Mm\end{tabular}} & 
+ \emptycells{2} 
+& \multirowthead{-12}{L\\ U\\ N\\ C\\ H}
+& \multicolumn{3}{c}{\cellcolor[HTML]{FE0000}{\color[HTML]{FFFFFF}\begin{tabular}[c]{@{}c@{}}GGGGGGGGG \\ MMMMMM\end{tabular}}}
+& \multicolumn{3}{c}{\cellcolor[HTML]{F8FF00}Ll Ss}
+&  \emptycells{1}  &
+\\
+\hhline{*{19}{-}}
+\rowcolor[HTML]{C2E7C2}
+Sat
+& \multicolumn{18}{c|}{\Gape[21pt][16pt]{}}
+\\
+\hhline{*{19}{-}}
+
+\end{tabular}
+\end{table}
+
+\end{document} 
