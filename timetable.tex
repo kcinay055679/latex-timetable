@@ -1,5 +1,11 @@
-\documentclass[a4paper,11pt,landscape]{book}
-\usepackage[inner=0.3in,outer=0.3in,tmargin=1in,bmargin=1in]{geometry}
+\documentclass{report}
+
+\usepackage[
+    a4paper,
+    total={150mm, 237mm},
+    left=30mm,
+    top=30mm,
+]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -13,87 +19,35 @@
 \usepackage{etex} 
 \usepackage{pgffor}
 \usepackage{expl3}
+\usepackage{typearea} % Page layout
 
-\setstackEOL{\\}
-\renewcommand\theadset{\cellcolor[HTML]{BBDAFF}\renewcommand\arraystretch{1.5}}
-\renewcommand\theadfont{\normalsize\bfseries\cellcolor[HTML]{BBDAFF}\color{IndianRed3}}
-\renewcommand\cellset{\mdseries}
+
+% \setstackEOL{\\}
+% \renewcommand\theadset{\cellcolor[HTML]{BBDAFF}\renewcommand\arraystretch{1.5}}
+% \renewcommand\theadfont{\normalsize\bfseries\cellcolor[HTML]{BBDAFF}\color{IndianRed3}}
+% \renewcommand\cellset{\mdseries}
 \usepackage{cellspace}
 \setlength\cellspacetoplimit{1ex}
 \setlength\cellspacebottomlimit{1ex}
 \def\thickvrule{\vrule width 1.5mm}
 \def\bluevrule{\color[HTML]{BBDAFF}\vrule width1pt}
 
+\input{commands.tex}
 
-\newcommand{\ipaDay}{1}
-\newcommand{\restDays}{3}
-
-\newcommand{\hoursPerDay}{8}
-\newcommand{\minutesPerHour}{60}
-
-\newcommand{\blockSize}{30}
-\newcommand{\blockAmount}{\number\numexpr \number\hoursPerDay * \number\minutesPerHour * \number\ipaDay / \number\blockSize\relax}
-\newcommand{\headerColsAmount}{\number\numexpr \number\blockAmount+1\relax}
-
-
-\ExplSyntaxOn{}
-\cs_new_eq:NN \Repeat\prg_replicate:nn
-\ExplSyntaxOff{}
-
-\newcommand{\aDay}[1]{
-  \Repeat{\blockAmount}{& \makecell{\blockSize}}
-}
-
-\newcounter{currentPlannedHours}
-\setcounter{currentPlannedHours}{0}
-
-\newcounter{currentDoneHours}
-\setcounter{currentDoneHours}{0}
-
-
-\newcommand{\timeslot}[3]{
-  \ifnum\number#1>0
-    \emptycells{\number#1} 
-  \fi
-
-  \Greencells{#2}{#2} &
-  \emptycells{#3} 
-}
-
-
-\newcommand{\task}[3]{
-  \\\hhline{*{\headerColsAmount}{-}}
-  #1
-  &
-
-  \timeslot{\number\thecurrentPlannedHours}{#2}{\numexpr\number\blockAmount-\number\thecurrentPlannedHours-#2-1\relax}
-  \\
-  \emptycells{} &
-  \timeslot{\number\thecurrentDoneHours}{#3}{\numexpr\number\blockAmount-\number\thecurrentDoneHours-#3-1\relax}
-
-  \addtocounter{currentPlannedHours}{\number#2}
-  \addtocounter{currentDoneHours}{\number#3}
-}
-
+\addIpaDay
+\addIpaDay
 
 \begin{document}
 \setlength\Lstackgap{1cm}
 \pagenumbering{gobble}
-% Please add the following required packages to your document preamble:
-% \usepackage{multirow}
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-\begin{table}[]
-\centering\sffamily\bfseries
-\setlength\arrayrulewidth{1.5mm}
-\newcommand\SsHh{\multicolumn{1}{Sc}{ \cellcolor[HTML]{F8A102}\begin{tabular}[c]{@{}c@{}}Sssss\\ Hhhh\end{tabular}}}
-\newcommand\Cc{\multicolumn{2}{Sc}{\cellcolor[HTML]{3531FF}{\color[HTML]{FFFFFF}Cc}}}
+
+\input{vars.tex}
+\begin{table}[]\label{my-label}
 \newcommand\Greencells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{009901}#2}}
 \newcommand\Lightbluecells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{34CDF9}#2}}
 \newcommand\emptycells[1]{\Repeat{#1}{\makecell{} &}}
-\label{my-label}
-\begin{tabular}{!{\thickvrule}Sc!{\thickvrule} *{8}{Sc!{\bluevrule}}
-Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{7}{Sc!{\bluevrule}}Sc!{\thickvrule}}
+
+\begin{tabular}{!{\thickvrule}Sc!{\thickvrule} *{\headerColsAmount}{Sc!{\bluevrule}}Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{5}{Sc!{\bluevrule}}Sc!{\thickvrule}}
 
 
 
@@ -101,7 +55,9 @@ Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{7}{Sc!{\bluevrule}}
 
 
 \hhline{*{\headerColsAmount}{-}}
-\aDay{} % could probably take hoursPerDay as an argument and date
+% \aDay{} % could probably take hoursPerDay as an argument and date
+% \aDay{} % could probably take hoursPerDay as an argument and date
+\calculateHeader
 
 \task{test}{2}{4}
 \task{123}{2}{4}

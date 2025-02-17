@@ -1,0 +1,16 @@
+% \newcommand{\ipaDays}{2}
+% \newcommand{\restDays}{3}
+
+\newcommand{\hoursPerDay}{8}
+\newcommand{\minutesPerHour}{60}
+
+\newcommand{\blockSize}{30}
+\newcommand{\blockAmount}{\number\numexpr \number\hoursPerDay * \number\minutesPerHour * \number\theipaDays / \number\blockSize + \number\therestDays\relax}
+\newcommand{\headerColsAmount}{\number\numexpr \number\blockAmount+1\relax}
+
+
+
+\newcouterinit{currentPlannedHours}
+\newcouterinit{currentDoneHours}
+
+\newcommand{\calculateHeader}{\Repeat{\blockAmount}{& \makecell{\blockSize}}}

@@ -1,0 +1,56 @@
+\ExplSyntaxOn{}
+\cs_new_eq:NN \Repeat\prg_replicate:nn
+\ExplSyntaxOff{}
+
+\storeareas\zeitplan
+\KOMAoptions{paper=a3, paper=landscape, DIV=current}
+\areaset
+  {\dimexpr\the\paperwidth-1cm\relax}% calculate requiered \textwidth
+  {\dimexpr\the\paperheight\relax}% calculate requiered \textheight
+\recalctypearea
+
+
+\newcommand{\newcouterinit}[2][0]{\newcounter{#2}\setcounter{#2}{#1}}
+
+
+\newcouterinit[0]{ipaDays}
+\newcouterinit[0]{restDays}
+
+
+\newcommand{\aDay}[1]{
+  \Repeat{\blockAmount}{& \makecell{\blockSize}}
+}
+
+
+\newcommand{\timeslot}[3]{
+  \ifnum\number#1>0
+    \emptycells{\number#1} 
+  \fi
+
+  \Greencells{#2}{#2} &
+  \emptycells{#3} 
+}
+
+\newcommand{\task}[3]{
+  \\\hhline{*{\headerColsAmount}{-}}
+  #1
+  &
+
+  \timeslot{\number\thecurrentPlannedHours}{#2}{\numexpr\number\blockAmount-\number\thecurrentPlannedHours-\number#2-1\relax}
+  \\
+  \emptycells{} &
+  \timeslot{\number\thecurrentDoneHours}{#3}{\numexpr\number\blockAmount-\number\thecurrentDoneHours-\number#3-1\relax}
+
+  \addtocounter{currentPlannedHours}{\number#2}
+  \addtocounter{currentDoneHours}{\number#3}
+}
+
+\newcommand{\addIpaDay}{
+    \addtocounter{ipaDays}{1}
+}
+
+\newcommand{\addIpaDay}{
+    \addtocounter{restDays}{1}
+}
+
+
