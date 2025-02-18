@@ -34,8 +34,8 @@
 
 \input{commands.tex}
 
-\addIpaDay
-\addIpaDay
+\newcouterinit[2]{ipaDays}
+\newcouterinit[0]{restDays}
 
 \begin{document}
 \setlength\Lstackgap{1cm}
@@ -43,21 +43,16 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\newcommand\Greencells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{009901}#2}}
-\newcommand\Lightbluecells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{34CDF9}#2}}
-\newcommand\emptycells[1]{\Repeat{#1}{\makecell{} &}}
-
-\begin{tabular}{!{\thickvrule}Sc!{\thickvrule} *{\headerColsAmount}{Sc!{\bluevrule}}Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{5}{Sc!{\bluevrule}}Sc!{\thickvrule}}
-
-
-
-
-
+\begin{tabular}{!{\thickvrule}Sc!{\thickvrule} *{\headerColsAmount}{Sc!{\bluevrule}}}
 
 \hhline{*{\headerColsAmount}{-}}
 % \aDay{} % could probably take hoursPerDay as an argument and date
+\blockAmountPerIpaDay &
+\aDayHeader{adate} &
+\aDayHeader{adate}
+\\\hhline{*{\headerColsAmount}{-}}
+\aDay{} % could probably take hoursPerDay as an argument and date
 % \aDay{} % could probably take hoursPerDay as an argument and date
-\calculateHeader
 
 \task{test}{2}{4}
 \task{123}{2}{4}

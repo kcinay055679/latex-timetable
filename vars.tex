@@ -5,6 +5,7 @@
 \newcommand{\minutesPerHour}{60}
 
 \newcommand{\blockSize}{30}
+\newcommand{\blockAmountPerIpaDay}{\number\numexpr \number\hoursPerDay * \number\minutesPerHour / \number\blockSize\relax}
 \newcommand{\blockAmount}{\number\numexpr \number\hoursPerDay * \number\minutesPerHour * \number\theipaDays / \number\blockSize + \number\therestDays\relax}
 \newcommand{\headerColsAmount}{\number\numexpr \number\blockAmount+1\relax}
 
@@ -13,4 +14,3 @@
 \newcouterinit{currentPlannedHours}
 \newcouterinit{currentDoneHours}
 
-\newcommand{\calculateHeader}{\Repeat{\blockAmount}{& \makecell{\blockSize}}}

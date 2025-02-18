@@ -13,12 +13,15 @@
 \newcommand{\newcouterinit}[2][0]{\newcounter{#2}\setcounter{#2}{#1}}
 
 
-\newcouterinit[0]{ipaDays}
-\newcouterinit[0]{restDays}
+
 
 
 \newcommand{\aDay}[1]{
   \Repeat{\blockAmount}{& \makecell{\blockSize}}
+}
+
+\newcommand{\aDayHeader}[1]{
+  \multicolumn{\blockAmountPerIpaDay}{c}{#1}
 }
 
 
@@ -45,12 +48,7 @@
   \addtocounter{currentDoneHours}{\number#3}
 }
 
-\newcommand{\addIpaDay}{
-    \addtocounter{ipaDays}{1}
-}
 
-\newcommand{\addIpaDay}{
-    \addtocounter{restDays}{1}
-}
-
-
+\newcommand\Greencells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{009901}#2}}
+\newcommand\Lightbluecells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{34CDF9}#2}}
+\newcommand\emptycells[1]{\Repeat{#1}{\makecell{} &}}
