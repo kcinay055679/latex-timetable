@@ -20,12 +20,22 @@
 \usepackage{pgffor}
 \usepackage{expl3}
 \usepackage{typearea} % Page layout
+\usepackage{tabularray}
 
 
-% \setstackEOL{\\}
-% \renewcommand\theadset{\cellcolor[HTML]{BBDAFF}\renewcommand\arraystretch{1.5}}
-% \renewcommand\theadfont{\normalsize\bfseries\cellcolor[HTML]{BBDAFF}\color{IndianRed3}}
-% \renewcommand\cellset{\mdseries}
+
+\usepackage{array} % needed for \newcolumntype
+\definecolor{Gray}{gray}{0.85}
+% Define a column type for the first column: a centered column with a thick vertical rule on both sides.
+\newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
+
+
+\newcolumntype{A}{*{\blockAmountPerIpaDay}{c!{\bluevrule}}|}
+
+\newcolumntype{H}{>{\columncolor{Gray}}c|}
+
+
+
 \usepackage{cellspace}
 \setlength\cellspacetoplimit{1ex}
 \setlength\cellspacebottomlimit{1ex}
@@ -43,19 +53,22 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\begin{tabular}{!{\thickvrule}Sc!{\thickvrule} *{\headerColsAmount}{Sc!{\bluevrule}}}
+\begin{tabular}{I A H A}
+    % Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{1}{Sc!{\bluevrule}}Sc!{\thickvrule}
 
-\hhline{*{\headerColsAmount}{-}}
+\hline
 % \aDay{} % could probably take hoursPerDay as an argument and date
 \blockAmountPerIpaDay &
 \aDayHeader{adate} &
 \aDayHeader{adate}
-\\\hhline{*{\headerColsAmount}{-}}
+\\
+\hline
 \aDay{} % could probably take hoursPerDay as an argument and date
-% \aDay{} % could probably take hoursPerDay as an argument and date
+\aDay{} % could probably take hoursPerDay as an argument and date
 
 \task{test}{2}{4}
 \task{123}{2}{4}
+\task{456}{2}{4}
 \task{456}{2}{4}
 % \\
 % \hhline{*{10}{-}>{\arrayrulecolor[HTML]{BBDAFF}}->{\arrayrulecolor{black}}*{8}{-}}
