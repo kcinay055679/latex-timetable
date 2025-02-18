@@ -21,10 +21,27 @@
 \usepackage{expl3}
 \usepackage{typearea} % Page layout
 \usepackage{tabularray}
-
-
-
 \usepackage{array} % needed for \newcolumntype
+\usepackage{array,xparse}
+
+\NewDocumentEnvironment{Timetable}{md<>O{c}mO{\nocols}}
+{%
+    \begin{#1}[#3]{#4}
+    \noalign{\CountColumns{#5}}
+}
+{\end{#1}}
+
+\ExplSyntaxOn
+% Change this to iterate over #4 of Timetable and return true if column is of type I
+\NewDocumentCommand{\CountColumns}{m}
+ {% count the number of & tokens in \@preamble
+  \regex_count:nvN { \cT\& } { @preamble } \l_tmpa_int
+  % they're one less than the columns
+  \cs_gset:Npx #1 { \int_eval:n { 1 + \l_tmpa_int } }
+ }
+\cs_generate_variant:Nn \regex_count:nnN { nv }
+\ExplSyntaxOff
+
 \definecolor{Gray}{gray}{0.85}
 % Define a column type for the first column: a centered column with a thick vertical rule on both sides.
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
@@ -53,14 +70,13 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\begin{tabular}{I A H A}
+\begin{Timetable}{tabular}{I A H A}
     % Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{1}{Sc!{\bluevrule}}Sc!{\thickvrule}
-
 \hline
 % \aDay{} % could probably take hoursPerDay as an argument and date
-\blockAmountPerIpaDay &
-\aDayHeader{adate} &
-\aDayHeader{adate}
+\blockAmountPerIpaDay ,   \nocols &
+\ipaDayHeader{1.1.1970} &
+\ipaDayHeader{1.1.1970}
 \\
 \hline
 \aDay{} % could probably take hoursPerDay as an argument and date
@@ -132,7 +148,8 @@
 % \\
 % \hhline{*{19}{-}}
 
-\end{tabular}
+\end{Timetable}
+% \end{tabular}
 \end{table}
 
 \end{document} 
