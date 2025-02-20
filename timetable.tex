@@ -43,30 +43,12 @@
 
 \NewDocumentCommand{\createIsWorkdayCommand}{mm}
 {
-    % Split the header specification string (#2) into a sequence using space as a delimiter
-
-
-
-    % \readlist\mylist{This is a very big test}
-    % ##1
-    % (\mylist[-1])
-    % (\mylist[2])
-    % Define a command that takes an index and checks if the value is "A"
-    % \newcommand\test[2]{(g:#1) (func \seq_use:Nn #2 { - }) }
-
     \cs_gset:Npn #1 ##1
       {
         \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
-
-        % (floor(##1/16) +2= \int_eval:n{\int_div_truncate:nn {##1}{16} +2})
         \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
-
-
-        % \str_if_eq:nnTF {\seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}} {A} { Ipa } { Ferie }
       }
   }
-  \cs_generate_variant:Nn \regex_count:nnN { nv }
-
 \ExplSyntaxOff
 
 
