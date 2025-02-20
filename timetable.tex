@@ -23,8 +23,12 @@
 \usepackage{tabularray}
 \usepackage{array} % needed for \newcolumntype
 \usepackage{array,xparse}
+\usepackage{listofitems}
 
-
+\newcommand\splitarg[1]{%
+  \setsepchar{ }%
+  \readlist\myarg{#1}%
+}
 
 \NewDocumentEnvironment{Timetable}{md<>O{c}mO{\isWorkday:n}}
 {%
@@ -32,36 +36,46 @@
     \createIsWorkdayCommand{#5}{#4}
 }
 {\end{#1}}
-
 \ExplSyntaxOn
+
+% Declare a global sequence to hold workday values
+\seq_new:N \g_workday_seq
+
 \NewDocumentCommand{\createIsWorkdayCommand}{mm}
-  { 
-        % Split the header specification string (#2) into a sequence using space as a delimiter.
-        
+{
+    % Split the header specification string (#2) into a sequence using space as a delimiter
 
-        % Debugging: Print the second element (should print "A" if it's there).
-        % \seq_item:Nn \g_workday_seq { 2 } 
-        % \str_if_eq:eeTF { \seq_item:Nn \g_workday_seq { 2 } } { A } { Ipa } { Ferie }
-        % \str_if_eq:eeTF { \seq_item:Nn \g_workday_seq { 3 } } { A } { Ipa } { Ferie }
-        
-        % Define a command that takes an index and returns whether the value at that index is "A".
-        % \NewDocumentCommand{\huii}{mm}{first: #1, second: #2}
-  
-        \cs_gset:Npx #1 ##1{
-        
+
+
+    % \readlist\mylist{This is a very big test}
+    % ##1
+    % (\mylist[-1])
+    % (\mylist[2])
+    % Define a command that takes an index and checks if the value is "A"
+    % \newcommand\test[2]{(g:#1) (func \seq_use:Nn #2 { - }) }
+
+    \cs_gset:Npn #1 ##1
+      {
+      \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
+
+        \seq_use:Nn \g_workday_seq { - } 
+
+        [##1]
+        % \seq_item:Nv \g_workday_seq {##1}
+        \seq_item:Nn \g_workday_seq {##1}
+
         (Head: #2)
-        (index: ##1)
-        \seq_set_split:Nnn \l_workday_seq { ~ } { #2 }
-        % Debugging output to verify input
-        (value: \seq_item:Nn \l_workday_seq { ##1 })
+    (index: ##1)
+        % (value: \l_tmpa_tl)
 
-        % Compare the extracted value with "A"
-        \str_if_eq:eeTF { \seq_item:Nn {\l_workday_seq} { ##1 } } { A } { Ipa } { Ferie }
+        % Perform comparison with properly expanded sequence item
+        % \str_if_eq:nnTF { \l_tmpa_tl } { A } { Ipa } { Ferie }
       }
-      % \isWorkdayCommand{1}
   }
+  \cs_generate_variant:Nn \regex_count:nnN { nv }
 
- \ExplSyntaxOff
+\ExplSyntaxOff
+
 
 
 \definecolor{Gray}{gray}{0.85}
@@ -92,7 +106,7 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{I A H A}
+\begin{Timetable}{tabular}{I A A A}
     % Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{1}{Sc!{\bluevrule}}Sc!{\thickvrule}
 \hline
 % \aDay{} % could probably take hoursPerDay as an argument and date
