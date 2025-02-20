@@ -56,20 +56,13 @@
 
     \cs_gset:Npn #1 ##1
       {
-      \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
+        \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
 
-        \seq_use:Nn \g_workday_seq { - } 
+        % (floor(##1/16) +2= \int_eval:n{\int_div_truncate:nn {##1}{16} +2})
+        \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
 
-        [##1]
-        % \seq_item:Nv \g_workday_seq {##1}
-        \seq_item:Nn \g_workday_seq {##1}
 
-        (Head: #2)
-    (index: ##1)
-        % (value: \l_tmpa_tl)
-
-        % Perform comparison with properly expanded sequence item
-        % \str_if_eq:nnTF { \l_tmpa_tl } { A } { Ipa } { Ferie }
+        % \str_if_eq:nnTF {\seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}} {A} { Ipa } { Ferie }
       }
   }
   \cs_generate_variant:Nn \regex_count:nnN { nv }
@@ -106,7 +99,7 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{I A A A}
+\begin{Timetable}{tabular}{I A H A}
     % Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{1}{Sc!{\bluevrule}}Sc!{\thickvrule}
 \hline
 % \aDay{} % could probably take hoursPerDay as an argument and date
@@ -122,6 +115,7 @@
 \task{123}{2}{4}
 \task{456}{2}{4}
 \task{456}{2}{4}
+\task{098}{2}{4}
 \hline
 
 % \\

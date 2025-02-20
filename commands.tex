@@ -31,11 +31,10 @@
   \fi
   % \isWorkday:n{0}
   % \isWorkday{1}
-  \isWorkday:n{1}
-  % \isWorkday:n{2}
+  
   % \isWorkday:n{3}
 
-  \Greencells{#2}{#2} &
+  \Greencells{#2}{#2(\isWorkday:n{#1})} &
   \emptycells{#3} 
 }
 
