@@ -4,10 +4,10 @@
 
 \storeareas\zeitplan
 \KOMAoptions{paper=a3, paper=landscape, DIV=current}
-\areaset
-  {\dimexpr\the\paperwidth-1cm\relax}% calculate requiered \textwidth
-  {\dimexpr\the\paperheight\relax}% calculate requiered \textheight
-\recalctypearea
+% \areaset
+%   {\dimexpr\the\paperwidth-1cm\relax}% calculate requiered \textwidth
+%   {\dimexpr\the\paperheight\relax}% calculate requiered \textheight
+% \recalctypearea
 
 
 \newcommand{\newcouterinit}[2][0]{\newcounter{#2}\setcounter{#2}{#1}}
@@ -17,11 +17,20 @@
 
 
 \newcommand{\aDay}[1]{
-  \Repeat{\blockAmountPerIpaDay}{& \makecell{\blockSize}}
+  % \blockAmountPerIpaDay -1
+  \Repeat{15}{\makecell{\blockSize}&}
+  \makecell{\blockSize}&
 }
 
 \newcommand{\ipaDayHeader}[1]{
-  \multicolumn{\blockAmountPerIpaDay}{c}{#1}
+  
+\multicolumn{\blockAmountPerIpaDay}{c}{
+  % #1
+  \begin{tabular}{*{16}{l|}}
+    % \multicolumn{14}{c}{#1}
+    \aDay{}
+  \end{tabular}
+}
 }
 
 
@@ -33,8 +42,8 @@
   % \isWorkday{1}
   
   % \isWorkday:n{3}
-
-  \Greencells{#2}{#2(\isWorkday:n{#1})} &
+  % #2(\isWorkday:n{#1})
+  \Greencells{#2}{} &
   \emptycells{#3} 
 }
 

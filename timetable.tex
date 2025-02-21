@@ -24,6 +24,7 @@
 \usepackage{array} % needed for \newcolumntype
 \usepackage{array,xparse}
 \usepackage{listofitems}
+\usepackage{multirow}
 
 \newcommand\splitarg[1]{%
   \setsepchar{ }%
@@ -43,7 +44,13 @@
 
 \NewDocumentCommand{\createIsWorkdayCommand}{mm}
 {
-    \cs_gset:Npn #1 ##1
+    \cs_gset:Npn \isWorkday ##1
+      {
+        \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
+        \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
+      }
+
+      \cs_gset:Npn \hasHolidayDays:nn ##1 ##2
       {
         \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
         \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
@@ -58,9 +65,9 @@
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
 
 
-\newcolumntype{A}{*{\blockAmountPerIpaDay}{c!{\bluevrule}}|}
+\newcolumntype{A}{*{\blockAmountPerIpaDay}{c!{\bluevrule}}}
 
-\newcolumntype{H}{>{\columncolor{Gray}}c|}
+\newcolumntype{H}{>{\columncolor{Gray}}c}
 
 
 
@@ -81,24 +88,23 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{I A H A}
+\begin{Timetable}{tabular}{I A}
     % Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{1}{Sc!{\bluevrule}}Sc!{\thickvrule}
-\hline
 % \aDay{} % could probably take hoursPerDay as an argument and date
-  &
+&
 \ipaDayHeader{1.1.1970} &
-\ipaDayHeader{1.1.1970}
-\\
-\hline
-\aDay{} % could probably take hoursPerDay as an argument and date
-\aDay{} % could probably take hoursPerDay as an argument and date
+% \holyDayHeader{1.1.1970} &
+% \ipaDayHeader{1.1.1970}
+
+% \aDay{} % could probably take hoursPerDay as an argument and date
+% \aDay{} % could probably take hoursPerDay as an argument and date
 
 \task{test}{2}{4}
-\task{123}{2}{4}
-\task{456}{2}{4}
-\task{456}{2}{4}
-\task{098}{2}{4}
-\hline
+% \task{123}{2}{4}
+% \task{456}{2}{4}
+% \task{456}{2}{4}
+% % \task{098}{2}{4}
+% \hline
 
 % \\
 % \hhline{*{10}{-}>{\arrayrulecolor[HTML]{BBDAFF}}->{\arrayrulecolor{black}}*{8}{-}}
