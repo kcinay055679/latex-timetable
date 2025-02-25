@@ -17,12 +17,11 @@
 
 
 \newcommand{\aDay}[1]{
-  \Repeat{\blockAmountPerIpaDay}{\makecell{\blockSize}&}
+  \Repeat{\blockAmountPerIpaDay}{& \makecell{\blockSize}}
 }
 
 \newcommand{\ipaDayHeader}[1]{
-  &
-  \multicolumn{\blockAmountPerIpaDay}{c}{#1}
+  &\multicolumn{\blockAmountPerIpaDay}{|c|}{#1}
 }
 \newcommand{\holidyDayHeader}{
   & Frei
@@ -46,13 +45,11 @@
 
 \newcommand{\task}[3]{
   #1
-  &
-
-  \timeslot{\number\thecurrentPlannedHours}{#2}{\numexpr\number\blockAmount-\number\thecurrentPlannedHours- (#2) -1\relax}
+  &\timeslot{\number\thecurrentPlannedHours}{#2}{\numexpr\number\blockAmount-\number\thecurrentPlannedHours- (#2) -1\relax}
   \\
-  % \emptycells{} 
-  &
-  \timeslot{\number\thecurrentDoneHours}{#3}{\numexpr\number\blockAmount-\number\thecurrentDoneHours- (#3) -1\relax}
+  &\timeslot{\number\thecurrentDoneHours}{#3}{\numexpr\number\blockAmount-\number\thecurrentDoneHours- (#3) -1\relax}
+  \\\hline
+
 
   \addtocounter{currentPlannedHours}{\number#2}
   \addtocounter{currentDoneHours}{\number#3}

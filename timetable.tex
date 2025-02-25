@@ -43,8 +43,8 @@
     \begin{#1}[#3]{I #4}
     \createDayHeader{#4}
     \\\hline
-    & \createDayTimeSlots{#4}
-    % \\\cline
+    \createDayTimeSlots{#4}
+    \\\hline
       
     \createIsWorkdayCommand{#5}{#4}
 }
@@ -59,7 +59,7 @@
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
 
 
-\newcolumntype{A}{*{\blockAmountPerIpaDay}{p{0.4cm}!{\bluevrule}}}
+\newcolumntype{A}{*{\blockAmountPerIpaDay}{c!{\bluevrule}}}
 
 \newcolumntype{H}{>{\columncolor{Gray}}c}
 
