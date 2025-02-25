@@ -17,14 +17,12 @@
 
 
 \newcommand{\aDay}[1]{
-  % \blockAmountPerIpaDay -1
   \Repeat{\blockAmountPerIpaDay}{\makecell{\blockSize}&}
-  % \makecell{\blockSize}&
 }
 
 \newcommand{\ipaDayHeader}[1]{
   &
-  \multicolumn{\blockAmountPerIpaDay}{c}{#1 t}
+  \multicolumn{\blockAmountPerIpaDay}{c}{#1}
 }
 \newcommand{\holidyDayHeader}{
   & Frei
@@ -47,7 +45,6 @@
 }
 
 \newcommand{\task}[3]{
-  \\\hhline{*{\headerColsAmount}{-}}
   #1
   &
 

@@ -9,7 +9,6 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-% \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage[english]{babel}
 \usepackage{multirow}
@@ -23,71 +22,18 @@
 \usepackage{tabularray}
 \usepackage{array} % needed for \newcolumntype
 \usepackage{xparse}
-% \usepackage{listofitems}
 \usepackage{multirow}
-% \usepackage{booktabs,siunitx}
-
-
-
-
-
-
 \usepackage{cellspace}
+
+
 \setlength\cellspacetoplimit{1ex}
 \setlength\cellspacebottomlimit{1ex}
 \def\thickvrule{\vrule width 1.5mm}
 \def\bluevrule{\color[HTML]{BBDAFF}\vrule width1pt}
 
 \input{commands.tex}
+\input{tex3.tex}
 
-\ExplSyntaxOn
-
-\cs_gset:Npn \runForDays #1#2#3
-{
-  \seq_set_split:Nnn \l_tmpa_seq { ~ } { #1 }
-  \seq_map_inline:Nn \l_tmpa_seq
-    {
-      \str_case:nn {##1}
-        {
-          {A}{#2}
-          {H}{#3}
-        }
-    }
-}
-
-\cs_gset:Npn \createDayTimeSlots #1
-{
-  \runForDays{#1}{\aDay{123}}{0 &}
-}
-
-\cs_gset:Npn \createDayHeader #1
-{
-  \runForDays{#1}{\ipaDayHeader{1.1.190}}{\holidyDayHeader{}}
-}
-
-\cs_gset:Npn \calcDays #1
-{
-  \runForDays{#1}{\addIpaDay}{\addRestDay}
-}
-
-% Declare a global sequence to hold workday values
-\seq_new:N \g_workday_seq
-
-\NewDocumentCommand{\createIsWorkdayCommand}{mm}
-{
-    \cs_gset:Npn \isWorkday ##1
-      {
-        \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
-        \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
-      }
-
-      \cs_gset:Npn \hasHolidayDays:nn ##1 ##2
-      {
-        \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
-        \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
-      }
-  }
-\ExplSyntaxOff
 
 
 
@@ -96,8 +42,9 @@
     \calcDays{#4}
     \begin{#1}[#3]{I #4}
     \createDayHeader{#4}
-    \\
+    \\\hline
     & \createDayTimeSlots{#4}
+    % \\\cline
       
     \createIsWorkdayCommand{#5}{#4}
 }
@@ -127,7 +74,7 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{A H}
+\begin{Timetable}{tabular}{A H A}
     % Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{1}{Sc!{\bluevrule}}Sc!{\thickvrule}
 % \aDay{} % could probably take hoursPerDay as an argument and date
 % \ipaDayHeader{1.1.1970}
