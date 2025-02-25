@@ -1,13 +1,13 @@
 % \newcommand{\ipaDays}{2}
 % \newcommand{\restDays}{3}
 
-\newcommand{\hoursPerDay}{8}
-\newcommand{\minutesPerHour}{60}
+\newcommand{\hoursPerDay}{\number8}
+\newcommand{\minutesPerHour}{\number60}
 
-\newcommand{\blockSize}{30}
-\newcommand{\blockAmountPerIpaDay}{\number\numexpr \number\hoursPerDay * \number\minutesPerHour / \number\blockSize\relax}
-\newcommand{\blockAmount}{\number\numexpr \number\hoursPerDay * \number\minutesPerHour * \number\theipaDays / \number\blockSize + \number\therestDays\relax}
-\newcommand{\headerColsAmount}{\number\numexpr \number\blockAmount+1\relax}
+\newcommand{\blockSize}{\number30}
+\newcommand{\blockAmountPerIpaDay}{\number\numexpr \hoursPerDay * \minutesPerHour / \blockSize\relax}
+\newcommand{\blockAmount}{\number\numexpr  \blockAmountPerIpaDay * \number\theipaDays + \number\therestDays\relax}
+\newcommand{\headerColsAmount}{\number\numexpr \blockAmount+1\relax}
 
 
 

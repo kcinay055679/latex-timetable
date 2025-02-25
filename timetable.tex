@@ -9,7 +9,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage{hyperref}
+% \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage[english]{babel}
 \usepackage{multirow}
@@ -22,10 +22,11 @@
 \usepackage{typearea} % Page layout
 \usepackage{tabularray}
 \usepackage{array} % needed for \newcolumntype
-\usepackage{array,xparse}
-\usepackage{listofitems}
+\usepackage{xparse}
+% \usepackage{listofitems}
 \usepackage{multirow}
-\usepackage{pgffor}
+% \usepackage{booktabs,siunitx}
+
 
 
 
@@ -61,7 +62,7 @@
 
 \cs_gset:Npn \createDayHeader #1
 {
-  \runForDays{#1}{\ipaDayHeader{123}}{\holidyDayHeader{}}
+  \runForDays{#1}{\ipaDayHeader{1.1.190}}{\holidyDayHeader{}}
 }
 
 \cs_gset:Npn \calcDays #1
@@ -94,7 +95,8 @@
 {
     \calcDays{#4}
     \begin{#1}[#3]{I #4}
-    & \createDayHeader{#4}
+    \createDayHeader{#4}
+    \\
     & \createDayTimeSlots{#4}
       
     \createIsWorkdayCommand{#5}{#4}
@@ -112,7 +114,7 @@
 
 \newcolumntype{A}{*{\blockAmountPerIpaDay}{p{0.4cm}!{\bluevrule}}}
 
-\newcolumntype{H}{>{\columncolor{Gray}}c@{}}
+\newcolumntype{H}{>{\columncolor{Gray}}c}
 
 
 
@@ -125,7 +127,7 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{A A H}
+\begin{Timetable}{tabular}{A H}
     % Sc!{\bluevrule}>{\columncolor[HTML]{BBDAFF}}Sc!{\bluevrule}*{1}{Sc!{\bluevrule}}Sc!{\thickvrule}
 % \aDay{} % could probably take hoursPerDay as an argument and date
 % \ipaDayHeader{1.1.1970}
@@ -134,9 +136,7 @@
 % \ipaDayHeader{1.1.1970}
 % \aDay{} % could probably take hoursPerDay as an argument and date
 % \aDay{} % could probably take hoursPerDay as an argument and date
-
-\task{test}{2}{4}
-% \task{123}{2}{4}
+\task{123}{2}{4}
 % \task{456}{2}{4}
 % \task{456}{2}{4}
 % % \task{098}{2}{4}
@@ -207,5 +207,7 @@
 \end{Timetable}
 % \end{tabular}
 \end{table}
+blockAmountPerIpaDay: \blockAmountPerIpaDay
+blockAmount: \blockAmount
 
 \end{document} 
