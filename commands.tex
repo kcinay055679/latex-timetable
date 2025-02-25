@@ -28,28 +28,24 @@
 }
 
 
-\newcommand{\timeslot}[4]{
+\newcommand{\timeslot}[3]{
   \ifnum\number#1>0
     \emptycells{\number#1} 
   \fi
   
-  \Greencells{#2}{#2 (\isWorkday{#1}) (\arabic{#4})} &
-  \emptycells{#3} 
-  
-  \addtocounter{#4}{\number#2}
+  \Greencells{#2}{#2 (\isWorkday{#1}) (\arabic{#3})} &
+  \emptycells{\numexpr\number\blockAmount-\number\arabic{#3} - (#2) -1\relax} 
+
+  \addtocounter{#3}{\number#2}
   
 }
 
 \newcommand{\task}[3]{
   #1
-  &\timeslot{\number\thecurrentPlannedHours}{#2}{\numexpr\number\blockAmount-\number\thecurrentPlannedHours- (#2) -1\relax}{currentPlannedHours}
+  &\timeslot{\number\thecurrentPlannedHours}{#2}{currentPlannedHours}
   \\
-  &\timeslot{\number\thecurrentDoneHours}{#3}{\numexpr\number\blockAmount-\number\thecurrentDoneHours- (#3) -1\relax}{currentDoneHours}
+  &\timeslot{\number\thecurrentDoneHours}{#3}{currentDoneHours}
   \\\hline
-
-
-  % \addtocounter{currentPlannedHours}{\number#2}
-  % \addtocounter{currentDoneHours}{\number#3}
 }
 
 
