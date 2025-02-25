@@ -18,19 +18,16 @@
 
 \newcommand{\aDay}[1]{
   % \blockAmountPerIpaDay -1
-  \Repeat{15}{\makecell{\blockSize}&}
-  \makecell{\blockSize}&
+  \Repeat{\blockAmountPerIpaDay}{\makecell{\blockSize}&}
+  % \makecell{\blockSize}&
 }
 
 \newcommand{\ipaDayHeader}[1]{
-  
-\multicolumn{\blockAmountPerIpaDay}{c}{
-  % #1
-  \begin{tabular}{*{16}{l|}}
-    % \multicolumn{14}{c}{#1}
-    \aDay{}
-  \end{tabular}
+  % \blockAmountPerIpaDay
+  \multicolumn{32}{|c|}{A day}
 }
+\newcommand{\holidyDayHeader}{
+  Frei &
 }
 
 
@@ -43,7 +40,9 @@
   
   % \isWorkday:n{3}
   % #2(\isWorkday:n{#1})
-  \Greencells{#2}{} &
+  % #2
+  \Greencells{#2}{#2} &
+  % \Greencells{#2}{} &
   \emptycells{#3} 
 }
 
@@ -54,7 +53,8 @@
 
   \timeslot{\number\thecurrentPlannedHours}{#2}{\numexpr\number\blockAmount-\number\thecurrentPlannedHours- (#2) -1\relax}
   \\
-  \emptycells{} &
+  % \emptycells{} 
+  &
   \timeslot{\number\thecurrentDoneHours}{#3}{\numexpr\number\blockAmount-\number\thecurrentDoneHours- (#3) -1\relax}
 
   \addtocounter{currentPlannedHours}{\number#2}
@@ -65,3 +65,9 @@
 \newcommand\Greencells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{009901}#2}}
 \newcommand\Lightbluecells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{34CDF9}#2}}
 \newcommand\emptycells[1]{\Repeat{#1}{\makecell{} &}}
+
+\newcouterinit[0]{ipaDays}
+\newcouterinit[0]{restDays}
+\newcommand{\addIpaDay}{\addtocounter{ipaDays}{1}}
+\newcommand{\addRestDay}{\addtocounter{restDays}{1}}
+
