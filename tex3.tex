@@ -29,21 +29,19 @@
   \runForDays{#1}{\addIpaDay}{\addRestDay}
 }
 
-% Declare a global sequence to hold workday values
-\seq_new:N \g_workday_seq
 
 \NewDocumentCommand{\createIsWorkdayCommand}{mm}
 {
     \cs_gset:Npn \isWorkday ##1
       {
-        \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
-        \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
+        \seq_set_split:Nnn \l_workday_seq { ~ } { #2 }
+        \seq_item:Nn \l_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{\blockAmountPerIpaDay} +2}}
       }
 
-      \cs_gset:Npn \hasHolidayDays:nn ##1 ##2
-      {
-        \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
-        \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
-      }
+      % \cs_gset:Npn \hasHolidayDays:nn ##1 ##2
+      % {
+      %   \seq_set_split:Nnn \g_workday_seq { ~ } { #2 }
+      %   \seq_item:Nn \g_workday_seq {\int_eval:n{\int_div_truncate:nn {##1}{16} +2}}
+      % }
   }
 \ExplSyntaxOff
