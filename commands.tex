@@ -27,12 +27,17 @@
   & Frei
 }
 
+\newcommand{\smartWhitspace}[1]{
+  % &\addtocounter{#1}{1}
+  % \isWorkday{\arabic{#1}}{#1}
+}
+
 
 \newcommand{\timeslot}[2]{
   \ifnum\arabic{#1}>0
     \emptycells{\arabic{#1}}
   \fi
-  \isWorkday{\arabic{#1}}{&\addtocounter{#1}{1}}{}{#1}
+  \smartWhitspace{#1}
   \Greencells{#2}{#2 (\arabic{#1})} &
   \emptycells{\numexpr\number\blockAmount-\arabic{#1} - (#2) -1\relax} 
   \addtocounter{#1}{\number#2}
