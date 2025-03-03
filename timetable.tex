@@ -1,9 +1,10 @@
-\documentclass{report}
+\documentclass{article}
 
 \usepackage[
     a3paper,
-    left=10mm,
-    top=10mm,
+    landscape,
+    showframe,
+    showcrop
 ]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -24,7 +25,6 @@
 \usepackage{multirow}
 \usepackage{cellspace}
 \usepackage{ifthen}
-
 
 
 \setlength\cellspacetoplimit{1ex}
@@ -75,12 +75,12 @@
 
 \input{vars.tex}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{A H A H H A}
+\begin{Timetable}{tabular}{A H A}
 
-\task{reaching}{8}{8}
-\task{reaching}{8}{8}
-\task{starting}{4}{4}
-\task{suprpassing}{16}{16}
+\task{34}{4}{4}
+\task{34}{12}{12}
+\task{34}{8}{8}
+% \task{suprpassing}{16}{16}
 
 % Tue
 % & \multicolumn{3}{c}{\cellcolor[HTML]{FFFC9E}\color{IndianRed3}E 2 : Class} 

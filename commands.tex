@@ -4,10 +4,10 @@
 
 \storeareas\zeitplan
 \KOMAoptions{paper=a3, paper=landscape, DIV=current}
-% \areaset
-%   {\dimexpr\the\paperwidth-1cm\relax}% calculate requiered \textwidth
-%   {\dimexpr\the\paperheight\relax}% calculate requiered \textheight
-% \recalctypearea
+\areaset
+  {\dimexpr\the\paperwidth -1cm\relax}% calculate requiered \textwidth
+  {\dimexpr\the\paperheight -5cm\relax}% calculate requiered \textheight
+\recalctypearea
 
 
 \newcommand{\newcouterinit}[2][0]{\newcounter{#2}\setcounter{#2}{#1}}
@@ -27,29 +27,15 @@
   & Frei
 }
 
-\newcommand{\whitespace}[1]{
-  & \addtocounter{#1}{1}
-}
-
-
-\newcommand{\smartWhiteSpace}[1]{
-  % \arabic{#1}
-  \isWorkday{\arabic{#1}}{\whitespace{#1}\smartWhiteSpace{#1}}
-}
-
-
 
 \newcommand{\timeslot}[2]{
   \ifnum\arabic{#1}>0
     \emptycells{\arabic{#1}}
   \fi
-  % \smartWhiteSpace{#1}
-  
-  \Greencells{#2}{#2 (\isWorkday{\arabic{#1}}) (\arabic{#1})} &
+  \isWorkday{\arabic{#1}}{&\addtocounter{#1}{1}}{}{#1}
+  \Greencells{#2}{#2 (\arabic{#1})} &
   \emptycells{\numexpr\number\blockAmount-\arabic{#1} - (#2) -1\relax} 
-
   \addtocounter{#1}{\number#2}
-  
 }
 
 \newcommand{\task}[3]{
