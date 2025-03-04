@@ -28,8 +28,10 @@
 }
 
 \newcommand{\smartWhitspace}[1]{
-  % &\addtocounter{#1}{1}
+  % \isWorkday{\arabic{#1}}{#1}
   \isWorkday{\arabic{#1}}{#1}
+  % \addtocounter{#1}{2}
+
 }
 
 
