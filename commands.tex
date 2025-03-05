@@ -14,6 +14,7 @@
 
 
 
+\def\useone#1{#1}
 
 
 \newcommand{\aDay}[1]{
@@ -28,11 +29,18 @@
 }
 
 \newcommand{\smartWhitspace}[1]{
-  % \isWorkday{\arabic{#1}}{#1}
-  \isWorkday{\arabic{#1}}{#1}
-  % \addtocounter{#1}{2}
-
+  % \isWorkday{A}{\addtocounter{#1}{1}&}
+  %\getDay{\arabic{#1}}{#1}
+  \def\tempLetter{ H }% 
+  \ifnum1=1
+  %\ifx\getDay{\arabic{#1}}{#1}\tempLetter{}%
+    \optionalCol{\addtocounter{#1}{1}&}%
+  \fi%
 }
+
+\newcommand{\insertOptionalCol}[2]{\ifnum#1=1 \fi }
+
+\newcommand\optionalCol[2]{#2\unexpanded{#1}}
 
 
 \newcommand{\timeslot}[2]{
