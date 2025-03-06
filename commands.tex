@@ -50,14 +50,14 @@
   % \tempStr
   % \show\tempStr
   % \meaning\tempStr
-  \isWorkday{H}{\addtocounter{#1}{1}&}
+  \isWorkday{A}{#1}{\Greencells{#2}{#2 (\arabic{#1})} &}
   % \pdfstrcmp{\tempStr}{H}
   % \ifnum\pdfstrcmp{\tempStr}{H}=0
     % \optionalCol{\addtocounter{#1}{1}&}%
   % \fi
 
   %\smartWhitspace{#1}
-  \Greencells{#2}{#2 (\arabic{#1})} &
+  % \Greencells{#2}{#2 (\arabic{#1})} &
   \emptycells{\numexpr\number\blockAmount-\arabic{#1} - (#2) -1\relax} 
   \addtocounter{#1}{\number#2}
 }

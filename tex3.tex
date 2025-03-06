@@ -43,8 +43,8 @@
 }
 % \newcommand\optionalCol[2]{#2\unexpanded{#1}}
 
-\cs_gset:Npn \isWorkday #1 #2{%
-\tl_if_eq:nnT#1{H}{\optionalCol{#2}}%
+\cs_gset:Npn \isWorkday #1 #2 #3{%
+\tl_if_eq:nnTF{#1}{H}{\addtocounter{#2}{1}&#3}{#3}
 }
 
 \NewDocumentCommand{\createIsWorkdayCommand}{mm}{
