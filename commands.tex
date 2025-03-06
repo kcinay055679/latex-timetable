@@ -45,19 +45,26 @@
   \ifnum\arabic{#1}>0
     \emptycells{\arabic{#1}}
   \fi
-  
-  \def\tempStr{\getDay{\arabic{#1}}}%
+  % 
+  % \def\tempStr{\getDay{\arabic{#1}}}%
   % \tempStr
   % \show\tempStr
   % \meaning\tempStr
-  \isWorkday{A}{#1}{\Greencells{#2}{#2 (\arabic{#1})} &}
-  % \pdfstrcmp{\tempStr}{H}
+  % \isWorkday{A}{#1}{\Greencells{#2}{#2 (\arabic{#1})}&}
+  % \pdfstrcmp{A}{A}
+  % \tempStr
+  % \pdfstrcmp{\getLetter}{H}
+  % 
+% 
+  \ifnum0=\pdfstrcmp{\getDay{\arabic{#1}}}{B}
+    \addtocounter{#1}{1}&
+  \fi
   % \ifnum\pdfstrcmp{\tempStr}{H}=0
     % \optionalCol{\addtocounter{#1}{1}&}%
   % \fi
-
+% 
   %\smartWhitspace{#1}
-  % \Greencells{#2}{#2 (\arabic{#1})} &
+  \Greencells{#2}{#2 (\arabic{#1})} &
   \emptycells{\numexpr\number\blockAmount-\arabic{#1} - (#2) -1\relax} 
   \addtocounter{#1}{\number#2}
 }
