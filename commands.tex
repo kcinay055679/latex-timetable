@@ -28,14 +28,12 @@
   & Frei
 }
 
-\newcommand{\smartWhitspace}[1]{
+\newcommand{\smartWhitspace}[2]{
   % \isWorkday{A}{\addtocounter{#1}{1}&}
   %\getDay{\arabic{#1}}{#1}
   \def\tempLetter{ H }% 
-  \ifnum1=1
-  %\ifx\getDay{\arabic{#1}}{#1}\tempLetter{}%
-    \optionalCol{\addtocounter{#1}{1}&}%
-  \fi%
+
+ % \ifthenelse{⟨\equal{\tempLetter}{\tempLetter}}{⟨then clause⟩}{⟨else clause⟩}
 }
 
 \newcommand{\insertOptionalCol}[2]{\ifnum#1=1 \fi }
@@ -47,7 +45,18 @@
   \ifnum\arabic{#1}>0
     \emptycells{\arabic{#1}}
   \fi
-  \smartWhitspace{#1}
+  
+  \def\tempStr{\getDay{\arabic{#1}}}%
+  % \tempStr
+  % \show\tempStr
+  % \meaning\tempStr
+  \isWorkday{H}{\addtocounter{#1}{1}&}
+  % \pdfstrcmp{\tempStr}{H}
+  % \ifnum\pdfstrcmp{\tempStr}{H}=0
+    % \optionalCol{\addtocounter{#1}{1}&}%
+  % \fi
+
+  %\smartWhitspace{#1}
   \Greencells{#2}{#2 (\arabic{#1})} &
   \emptycells{\numexpr\number\blockAmount-\arabic{#1} - (#2) -1\relax} 
   \addtocounter{#1}{\number#2}
