@@ -28,30 +28,6 @@
   & Frei
 }
 
-\newcommand{\smartWhitspace}[2]{
-  % \isWorkday{A}{\addtocounter{#1}{1}&}
-  %\getDay{\arabic{#1}}{#1}
-  \def\tempLetter{ H }% 
-
- % \ifthenelse{⟨\equal{\tempLetter}{\tempLetter}}{⟨then clause⟩}{⟨else clause⟩}
-}
-
-\newcommand{\insertOptionalCol}[2]{\ifnum#1=1 \fi }
-
-\newcommand\optionalCol[2]{#2\unexpanded{#1}}
-
-
-\newcommand{\timeslot}[2]{
-  \ifnum\arabic{#1}>0
-    \emptycells{\arabic{#1}}
-  \fi
-  \ifnum0=\pdfstrcmp{\getDay{\arabic{#1}}}{B}
-    \addtocounter{#1}{1}&
-  \fi
-  \Greencells{#2}{#2 (\arabic{#1})} &
-  \emptycells{\numexpr\number\blockAmount-\arabic{#1} - (#2) -1\relax} 
-  \addtocounter{#1}{\number#2}
-}
 
 \newcommand{\task}[3]{
   #1
@@ -60,7 +36,6 @@
   &\timeslot{currentDoneHours}{#3}
   \\\hline
 }
-
 
 \newcommand\Greencells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{009901}#2}}
 \newcommand\Lightbluecells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{34CDF9}#2}}
