@@ -1,4 +1,6 @@
 \ExplSyntaxOn
+\seq_new:N \l_shepi_sub_seq
+
 \cs_generate_variant:Nn \tl_if_eq:nnTF { V }
 \cs_generate_variant:Nn \tl_if_eq:nnT { V }
 
@@ -8,13 +10,20 @@
   \ifnum\arabic{#1}>0
     \emptycells{\arabic{#1}}
   \fi
+  % \message{DEBUG:\noexpand\getDay{\arabic{#1}}}%
 
+  % \tl_set:Nn \l_tmpa_tl { \getDay{\arabic{#1}} }%
+  % \str_if_eq:VnT {\getDay{\arabic{#1}}} { H }
+  % { \addtocounter{#1}{1}&}
+  \seq_set_split:Nnn\l_workday_seq { } {A H A}%
+  
+  \tl_if_eq:enT {\seq_item:Nn \l_workday_seq { \getDayIndex{\arabic{#1}} }} { H }
+  {\addtocounter{#1}{1}& }
+  
 
-  \str_if_eq:VnT { \getLetter } { H }
-  { \addtocounter{#1}{1}& }
   % { \addtocounter{#1}{2}&& }
 
-  \Greencells{#2}{#2 (\arabic{#1})(\getDay{\arabic{#1}})} &
+  \Greencells{#2}{#2 (\arabic{#1})(\expandafter{\getDay{\arabic{#1}}})} &
   \emptycells{\numexpr\number\blockAmount-\arabic{#1} - (#2) -1\relax} 
   \addtocounter{#1}{\number#2}
 }
@@ -47,11 +56,27 @@
   \runForDays{#1}{\addIpaDay}{\addRestDay}
 }
 
+\cs_gset:Npn \getDayIndex #1
+{
+  \int_div_truncate:nn {#1}{\blockAmountPerIpaDay} + 1
+}
+
+\cs_gset:Npn \getDay #1{
+  % % \new_seq:N \l_workday_seq
+  % \def\data{1 2 3}
+
+  % \readlist\mylist{\data}
+
+  % \mylist[2]
+  \seq_set_split:Nnn\l_workday_seq { } {A H A}%
+  \seq_item:Nn \l_workday_seq { \getDayIndex{#1} }
+}
+
 \NewDocumentCommand{\createIsWorkdayCommand}{mm}{
-  \cs_gset:Npn \getDay ##1{
-    \seq_set_split:Nnn\l_workday_seq { } {#2}%
-    \int_set:Nn \l_tmpa_int { \int_div_truncate:nn {##1}{\blockAmountPerIpaDay} + 1}
-    \seq_item:Nn \l_workday_seq { \int_use:N \l_tmpa_int }
-  }
+  % \seq_set_split:Nnn \l_workday_seq { } {#2}
+  % \cs_gset:Npn \getDay ##1 {
+  %   % \int_set:Nn \l_tmpa_int { \int_div_truncate:nn {##1}{\blockAmountPerIpaDay} + 1}
+  %   \tl_to_str:n { \seq_item:Nn \l_workday_seq { \getDayIndex{#1} } }
+  % }
 }
 \ExplSyntaxOff{}

@@ -26,6 +26,8 @@
 \usepackage{cellspace}
 \usepackage{ifthen}
 \usepackage{pdftexcmds}
+\usepackage{listofitems}
+
 
 
 
@@ -38,19 +40,19 @@
 \input{tex3.tex}
 
 
-
+\setsepchar{ }
+\ignoreemptyitems
 
 \NewDocumentEnvironment{Timetable}{md<>O{c}mO{\isWorkday:n}}
 {
     \calcDays{#4}
-    \begin{#1}[#3]{I #4}
-    \createDayHeader{#4}
-    \\\hline
-    \createDayTimeSlots{#4}
-    \\\hline
-      
-    \createIsWorkdayCommand{#5}{#4}
-}
+    \begin{#1}[#3]{I #4}%
+    \createDayHeader{#4}%
+    \\\hline%
+    \createDayTimeSlots{#4}%
+    \\\hline%
+    \createIsWorkdayCommand{#5}{#4}%
+}%
 {\end{#1}}
 
 
@@ -77,14 +79,14 @@
 
 \input{vars.tex}
 
-
+\addtocounter{currentPlannedHours}{16}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{A H A}
-
+\begin{Timetable}{tabular}{A H A}%
+% \getDay{20}
 \task{a name}{8}{5}
-\task{another name}{4}{5}
-\task{34}{4}{6}
-\task{34}{4}{6}
+% \task{another name}{4}{5}
+% \task{34}{4}{6}
+% \task{34}{4}{6}
 % \task{suprpassing}{16}{16}
 
 % Tue
