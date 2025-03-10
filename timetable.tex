@@ -51,7 +51,8 @@
     \\\hline%
     \createDayTimeSlots{#4}%
     \\\hline%
-    \createIsWorkdayCommand{#5}{#4}%
+    \createGetDay{#4}
+    \createTimeslot{#4}
 }%
 {\end{#1}}
 
