@@ -53,7 +53,7 @@
 
 
     \str_if_eq:nnT
-      { \exp_args:Ne \getDay{\arabic{##1}} }
+      { \getDay{\arabic{##1}} }
       { H }
       { \addtocounter{##1}{1}& }
 
