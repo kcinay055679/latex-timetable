@@ -35,6 +35,8 @@
 \input{commands.tex}
 \input{tex3.tex}
 \input{colors.tex}
+\setlength{\tabcolsep}{0pt}%
+
 
 \NewDocumentEnvironment{Timetable}{md<>O{W W}mO{2025}O{03}O{19}}
 {
@@ -62,7 +64,7 @@
 \newcolumntype{H}{@{}>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
 \newcolumntype{W}{*{\blockAmountPerIpaDay}{@{}p{0.5cm}@{}!{\bluevrule}}@{}}
-\newcolumntype{R}{@{}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
+\newcolumntype{R}{@{}>{\centering\arraybackslash\columncolor{Gray}}m{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
 
 \begin{document}
 \setlength\Lstackgap{1cm}
