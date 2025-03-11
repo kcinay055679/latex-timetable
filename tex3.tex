@@ -27,7 +27,7 @@
 
 \cs_gset:Npn \createDayHeader #1
 {
-  \runForDays{#1}{\ipaDayHeader{1.1.190}}{\holidyDayHeader{}}
+  \runForDays{#1}{\nextdate\ipaDayHeader{\datedate}}{\holidyDayHeader{}\nextdate}
 }
 
 \cs_gset:Npn \calcDays #1
