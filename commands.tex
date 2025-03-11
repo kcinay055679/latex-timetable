@@ -1,5 +1,11 @@
 \ExplSyntaxOn{}
 \cs_new_eq:NN \Repeat\prg_replicate:nn
+
+\newcommand{\aDay}[1]{
+  \int_step_inline:nn {\expandafter\blockAmountPerIpaDay} {& \makecell{##1}}
+
+  % \Repeat{}{& \makecell{\blockSize}}
+}
 \ExplSyntaxOff{}
 
 \storeareas\zeitplan
@@ -17,9 +23,7 @@
 \def\useone#1{#1}
 
 
-\newcommand{\aDay}[1]{
-  \Repeat{\blockAmountPerIpaDay}{& \makecell{\blockSize}}
-}
+
 
 \newcommand{\ipaDayHeader}[1]{
   &\multicolumn{\blockAmountPerIpaDay}{|c|}{#1}
