@@ -86,9 +86,8 @@
         \int_gzero:N\g_slots_to_draw
       }
     }
-        
     % \timeslotItem{##1}{\expandafter\int_use:N \g_slots_to_draw}{##2}
-    \emptycells{\numexpr\number\blockAmount-\arabic{##1}- (##2) -1\relax} 
+    \emptycells{\numexpr\number\blockAmount-\arabic{##1}\relax} 
   }
 }
 
