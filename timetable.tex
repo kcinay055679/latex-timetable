@@ -62,12 +62,16 @@
 
 \definecolor{Gray}{gray}{0.85}
 % Define a column type for the first column: a centered column with a thick vertical rule on both sides.
+\newsavebox\dummy
+
+\newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
 
 
 \newcolumntype{W}{*{\blockAmountPerIpaDay}{c!{\bluevrule}}}
 
-\newcolumntype{R}{>{\columncolor{Gray}}c}
+% *{\blockAmountPerIpaDay}{H}
+\newcolumntype{R}{>{\columncolor{Gray}}c*{\hiddnRestColls}{H}}
 
 
 
@@ -86,8 +90,8 @@
 % \getDay{20}
 \task{a name}{8}{5}
 \task{a name}{8}{5}
-\task{a name}{8}{5}
 \task{a name}{2}{2}
+% \task{a name}{2}{2}
 % \task{a name}{8}{5}
 % \task{a name}{8}{5}
 % \task{a name}{8}{5}
