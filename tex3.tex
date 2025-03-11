@@ -35,14 +35,26 @@
   \int_div_truncate:nn {#1}{\blockAmountPerIpaDay} + 1
 }
 
+\cs_gset:Npn \insertRestDaySpace{
+  \Repeat{\hiddnRestColls}{&}
+}
+
+\cs_gset:Npn \timeslotItem #1#2{
+  \bool_while_do:nn
+    {
+      \str_compare_p:eNe { \getDay{\arabic{#1}} } = { R }
+    }
+    {
+      \Repeat{\blockAmountPerIpaDay}{\addtocounter{#1}{1}&}
+    }
+
+    \Greencells{#2}{#2 (\arabic{#1}) ()} &
+}
+
 \NewDocumentCommand{\createGetDay}{m}{
   \cs_gset:Npn \getDay ##1{
     \tl_item:nn {#1}{\getDayIndex{##1}}
   }
-}
-
-\cs_gset:Npn \insertRestDaySpace{
-  \Repeat{\hiddnRestColls}{&}
 }
 
 \NewDocumentCommand{\createTimeslot}{m}{
@@ -50,22 +62,9 @@
     \ifnum\arabic{##1}>0\relax
       \emptycells{\arabic{##1}}
     \fi
-
-  \bool_while_do:nn
-    {
-      \str_compare_p:eNe { \getDay{\arabic{##1}} } = { R }
-    }
-    {
-      \Repeat{\blockAmountPerIpaDay}{\addtocounter{##1}{1}&}
-      % \addtocounter{##1}{16}&&&&&&&&&&&&&&&&
-    }
-
-    % \str_if_eq:eeT
-    %   { \getDay{\arabic{##1}} }
-    %   { R }
-    %   { \addtocounter{##1}{1}& }
-
-    \Greencells{##2}{##2 (\arabic{##1}) ()} &
+    
+    \timeslotItem{##1}{##2}
+  
     \emptycells{\numexpr\number\blockAmount-\arabic{##1}- (##2) -1\relax} 
     \addtocounter{##1}{\number##2}
   }
