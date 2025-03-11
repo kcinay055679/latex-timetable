@@ -39,7 +39,7 @@
   \Repeat{\hiddnRestColls}{&}
 }
 
-\cs_gset:Npn \timeslotItem #1#2{
+\cs_gset:Npn \timeslotItem #1#2#3{
   \bool_while_do:nn
     {
       \str_compare_p:eNe { \getDay{\arabic{#1}} } = { R }
@@ -49,7 +49,7 @@
     }
 
     % \Greencells{#2}{#2 (\arabic{#1}) ()} &
-    \Greencells{#2}{#2 (\arabic{#1}) (\blocksTilNextRest{#1})} &
+    \Greencells{#2}{(#3) (\blocksTilNextRest{#1})} &
 }
 
 \NewDocumentCommand{\createGetDay}{m}{
@@ -59,12 +59,30 @@
 }
 
 \NewDocumentCommand{\createTimeslot}{m}{
+  \int_new:N \g_slots_to_draw
+  \int_new:N \g_drawn_slots
   \cs_gset:Npn \timeslot ##1##2{
-    \ifnum\arabic{##1}>0\relax
+    \int_compare:nNnT {\arabic{##1}} > {0} {
+      \int_gset:Nn\g_slots_to_draw{\number##2}%
+      \int_gset:Nn\g_drawn_slots{0}%
+      % \int_gset:Nn\g_drawn_slots{\number##2}%
       \emptycells{\arabic{##1}}
-    \fi
-    
-    \timeslotItem{##1}{##2}
+    }
+
+    % \int_do_until:nNnn {\g_drawn_slots} = {\g_slots_to_draw} {
+      % \int_compare:nTF {\g_slots_to_draw > \blocksTilNextRest{##1}}
+      % {
+      %   % \timeslotItem{##1}{\blocksTilNextRest{##1}}{##2}
+      %   \int_gset:Nn\g_slots_to_draw{\int_eval:n{\g_slots_to_draw -\blocksTilNextRest{##1}}}
+      % }
+      % {
+      %   % \timeslotItem{##1}{\int_use:N \g_slots_to_draw}{##2}
+      %   \int_gset:Nn\g_slots_to_draw{0}
+      % }
+    % }
+        
+    \timeslotItem{##1}{##2}{##2}
+
   
     \emptycells{\numexpr\number\blockAmount-\arabic{##1}- (##2) -1\relax} 
     \addtocounter{##1}{\number##2}
