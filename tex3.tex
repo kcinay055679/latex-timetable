@@ -56,7 +56,8 @@
       \str_compare_p:eNe { \getDay{\arabic{##1}} } = { R }
     }
     {
-      \addtocounter{##1}{16}&&&&&&&&&&&&&&&&
+      \Repeat{\blockAmountPerIpaDay}{\addtocounter{##1}{1}&}
+      % \addtocounter{##1}{16}&&&&&&&&&&&&&&&&
     }
 
     % \str_if_eq:eeT
