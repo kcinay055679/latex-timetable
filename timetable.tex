@@ -21,6 +21,7 @@
 \usepackage{array} % needed for \newcolumntype
 \usepackage{xparse}
 \usepackage{cellspace}
+\usepackage{multirow}
 
 
 \setlength\cellspacetoplimit{1ex}
@@ -36,6 +37,7 @@
 {
     \calcDays{#4}
     \begin{#1}[#3]{I #4}%
+    \hline%
     \createDayHeader{#4}%
     \\\hline%
     \createDayTimeSlots{#4}%
@@ -48,13 +50,15 @@
 
 \definecolor{Gray}{gray}{0.85}
 
-\newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
+\newcolumntype{H}{@{}>{\leavevmode\columncolor{Gray}\setbox0=\hbox\bgroup}c<{\egroup}}
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
 
 
 \newcolumntype{W}{*{\blockAmountPerIpaDay}{c!{\bluevrule}}}
 
-\newcolumntype{R}{>{\columncolor{Gray}}c*{\hiddnRestColls}{H}!{\bluevrule}}
+\newcolumntype{R}{>{\leavevmode\columncolor{Gray}}c*{\hiddnRestColls}{H}!{\bluevrule}}
+% \newcolumntype{R}{@{}c*{\hiddnRestColls}{H}!{\bluevrule}}
+% \newcolumntype{R}{@{}c*{\hiddnRestColls}{H}!{\bluevrule}}
 
 
 
@@ -70,6 +74,7 @@
 \begin{table}[]\label{my-label}
 \begin{Timetable}{tabular}{W R W}%
 \colorBlue
+
 \task{a name}{8}{8}
 \task{a name}{9}{8}
 \colorRed
