@@ -1,7 +1,5 @@
 \ExplSyntaxOn
 
-\cs_new:Npn \getLetter{H} % Example function returning 'A'
-
 \cs_generate_variant:Nn \int_eval:n {e}
 \cs_generate_variant:Nn \int_eval:n {v}
 \cs_generate_variant:Nn \int_eval:n {V}
@@ -89,7 +87,7 @@
         \int_gzero:N\g_slots_to_draw
       }
     }
-    % \timeslotItem{##1}{\expandafter\int_use:N \g_slots_to_draw}{##2}
+
     \emptycells{\numexpr\number\blockAmount-\arabic{##1}\relax} 
   }
 }
