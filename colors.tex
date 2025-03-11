@@ -1,23 +1,24 @@
 \ExplSyntaxOn{}
 \str_new:N \g_currentPlannedColor
 \str_new:N \g_currentDoneColor
+\str_set:Nn \g_currentPlannedColor{34CDF9}
+\str_set:Nn \g_currentDoneColor{145263}
 
 \cs_gset:Npn \getColor #1{
   \str_case:nn {#1}
     {
-      {currentPlannedHours}{\currentPlannedColor}
-      {currentDoneHours}{\currentDoneColor}
+      {currentPlannedHours}{\g_currentPlannedColor}
+      {currentDoneHours}{\g_currentDoneColor}
     }
 }
-\ExplSyntaxOff{}
 
 \newcommand{\currentPlannedColor}{34CDF9}
 \newcommand{\currentDoneColor}{145263}
 
 
 \newcommand{\setColor}[2]{
-    \expandafter\renewcommand{\currentPlannedColor}{#1}
-    \expandafter\renewcommand{\currentDoneColor}{#2}
+    \str_gset:Nn \g_currentPlannedColor{#1}
+    \str_gset:Nn \g_currentDoneColor{#2}
     }
 
 \newcommand{\colorRed}{
@@ -25,3 +26,4 @@
     \setColor{FF0000}{880808}
 }
 
+\ExplSyntaxOff{}
