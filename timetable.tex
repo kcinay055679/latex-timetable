@@ -40,10 +40,6 @@
 \input{tex3.tex}
 \input{colors.tex}
 
-
-\setsepchar{ }
-\ignoreemptyitems
-
 \NewDocumentEnvironment{Timetable}{md<>O{c}mO{\isWorkday:n}}
 {
     \calcDays{#4}
@@ -58,13 +54,7 @@
 }%
 {\end{#1}}
 
-
-
-
-
 \definecolor{Gray}{gray}{0.85}
-% Define a column type for the first column: a centered column with a thick vertical rule on both sides.
-\newsavebox\dummy
 
 \newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
@@ -72,7 +62,6 @@
 
 \newcolumntype{W}{*{\blockAmountPerIpaDay}{c!{\bluevrule}}}
 
-% *{\blockAmountPerIpaDay}{H}
 \newcolumntype{R}{>{\columncolor{Gray}}c*{\hiddnRestColls}{H}!{\bluevrule}}
 
 
@@ -86,17 +75,12 @@
 
 \input{vars.tex}
 
-% \addtocounter{currentPlannedHours}{16}
 \begin{table}[]\label{my-label}
 \begin{Timetable}{tabular}{W R W}%
-    \currentPlannedColor
-    \currentDoneColor
-    
+\colorBlue
 \task{a name}{8}{8}
 \task{a name}{9}{8}
 \colorRed
-\currentPlannedColor
-\currentDoneColor
 \task{a name}{4}{2}
 % \task{a name}{2}{2}
 % \task{a name}{8}{5}

@@ -1,8 +1,6 @@
 \ExplSyntaxOn{}
 \str_new:N \g_currentPlannedColor
 \str_new:N \g_currentDoneColor
-\str_set:Nn \g_currentPlannedColor{34CDF9}
-\str_set:Nn \g_currentDoneColor{145263}
 
 \cs_gset:Npn \getColor #1{
   \str_case:nn {#1}
@@ -24,6 +22,9 @@
 \newcommand{\colorRed}{
     % \renewcommand{\currentPlannedColor}{FF0000}
     \setColor{FF0000}{880808}
+}
+\newcommand{\colorBlue}{
+    \setColor{34CDF9}{145263}
 }
 
 \ExplSyntaxOff{}
