@@ -38,6 +38,7 @@
 
 \input{commands.tex}
 \input{tex3.tex}
+\input{colors.tex}
 
 
 \setsepchar{ }
@@ -88,9 +89,14 @@
 % \addtocounter{currentPlannedHours}{16}
 \begin{table}[]\label{my-label}
 \begin{Timetable}{tabular}{W R W}%
-% \getDay{20}
+    \currentPlannedColor
+    \currentDoneColor
+    
 \task{a name}{8}{8}
 \task{a name}{9}{8}
+\colorRed
+\currentPlannedColor
+\currentDoneColor
 \task{a name}{4}{2}
 % \task{a name}{2}{2}
 % \task{a name}{8}{5}

@@ -18,13 +18,7 @@
     }
 }
 
-\cs_gset:Npn \getColor #1{
-  \str_case:nn {#1}
-    {
-      {currentPlannedHours}{\currentPlannedColor}
-      {currentDoneHours}{\currentDoneColor}
-    }
-}
+
 
 \cs_gset:Npn \createDayTimeSlots #1
 {
