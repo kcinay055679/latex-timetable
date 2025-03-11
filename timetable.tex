@@ -38,7 +38,7 @@
 \setlength{\tabcolsep}{0pt}%
 
 
-\NewDocumentEnvironment{Timetable}{md<>O{W W}mO{2025}O{03}O{19}}
+\NewDocumentEnvironment{Timetable}{md<>O{W W}mO{2025}O{03}O{11}}
 {
     \setdatenumber{#5}{#6}{#7}
     \calcDays{#4}
@@ -64,7 +64,8 @@
 \newcolumntype{H}{@{}>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
 \newcolumntype{W}{*{\blockAmountPerIpaDay}{@{}p{0.5cm}@{}!{\bluevrule}}@{}}
-\newcolumntype{R}{@{}>{\centering\arraybackslash\columncolor{Gray}}m{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
+\newcolumntype{R}{@{}>{}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
+%\newcolumntype{R}{@{}>{\columncolor{Gray}}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
 
 \begin{document}
 \setlength\Lstackgap{1cm}
@@ -76,9 +77,12 @@
 \begin{Timetable}{tabular}{W R R R W R R W}
 \colorBlue
 
-\task{a name}{8}{8}
-\task{a name}{9}{8}
+\task{Aufgabe 1}{4}{3}
+\task{Aufgabe 2}{8}{2}
 \colorRed
+\task{a name}{4}{2}
+\task{a name}{4}{2}
+\task{a name}{4}{2}
 \task{a name}{4}{2}
 
 
