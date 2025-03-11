@@ -64,8 +64,8 @@
 \newcolumntype{H}{@{}>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
 \newcolumntype{W}{*{\blockAmountPerIpaDay}{@{}p{0.5cm}@{}!{\bluevrule}}@{}}
-\newcolumntype{R}{@{}>{}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
-%\newcolumntype{R}{@{}>{\columncolor{Gray}}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
+%\newcolumntype{R}{@{}>{}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
+\newcolumntype{R}{@{}>{\columncolor{Gray}}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
 
 \begin{document}
 \setlength\Lstackgap{1cm}
@@ -84,6 +84,10 @@
 \task{a name}{4}{2}
 \task{a name}{4}{2}
 \task{a name}{4}{2}
+
+
+%\endTable
+&&&&&&&&&&&&&&&&&\multirow{-15}{*}{\rotatebox[origin=l]{90}{Frei am: \datedate}} 
 
 
 \end{Timetable}

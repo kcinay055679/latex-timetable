@@ -49,7 +49,7 @@
       \str_compare_p:eNe { \getDay{\arabic{#1}} } = { R }
     }
     {
-      \Repeat{\blockAmountPerIpaDay}{\addtocounter{#1}{1}&}
+      \Repeat{\blockAmountPerIpaDay}{\addtocounter{#1}{1}&\cellcolor{Gray}}
     }
 
     &\coloredCell{#1}{#2}{#3}
