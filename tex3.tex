@@ -43,8 +43,6 @@
 }
 
 \cs_gset:Npn \timeslotItem #1#2#3{
-  % \getDay{}
-  \arabic{#1}
   \bool_while_do:nn
     {
       \str_compare_p:eNe { \getDay{\arabic{#1}} } = { R }
@@ -53,9 +51,7 @@
       \Repeat{\blockAmountPerIpaDay}{\addtocounter{#1}{1}&}
     }
 
-    % \Greencells{#2}{#2 (\arabic{#1}) ()} &
-    % \addtocounter{#1}{1}&
-    &\Greencells{#2}{(#3) (\blocksTilNextRest{#1})}
+    &\Greencells{#2}{#3}
     \addtocounter{#1}{\number#2}
 }
 
@@ -79,7 +75,6 @@
 
     \int_do_until:nNnn {\g_drawn_slots} = {\g_slots_to_draw} {
       \blocksTilNextRest{##1}
-      % (\int_use:N \g_till_next_rest)
       \int_compare:nTF {\g_slots_to_draw > \g_till_next_rest}
       {
         \int_gset:Nn\g_slots_to_be_drawn{\int_eval:n{\g_slots_to_draw -(\g_slots_to_draw -\g_till_next_rest)}}
@@ -89,15 +84,11 @@
       {
         \timeslotItem{##1}{\int_use:N \g_slots_to_draw}{##2}
         \int_gzero:N\g_slots_to_draw
-        % \int_gset:Nn\g_slots_to_draw{0}
       }
     }
         
     % \timeslotItem{##1}{\expandafter\int_use:N \g_slots_to_draw}{##2}
-
-  
     \emptycells{\numexpr\number\blockAmount-\arabic{##1}- (##2) -1\relax} 
-    
   }
 }
 
@@ -108,7 +99,6 @@
   \cs_gset:Npn \blocksTilNextRest ##1{
     \int_gset:Nn \g_till_next_rest {\arabic{##1}}
   
-    
     \bool_while_do:nn
     {
       \str_compare_p:eNe { \getDay{\number\numexpr\arabic{##1} + \g_till_next_rest\relax} } = { W }
@@ -116,7 +106,6 @@
     {
       \int_gset:Nn \g_till_next_rest {\int_eval:n { \g_till_next_rest + 1 }}
     }
-    % \int_use:N \g_till_next_rest
   }
 }
 
