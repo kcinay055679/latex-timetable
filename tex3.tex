@@ -48,7 +48,8 @@
       \Repeat{\blockAmountPerIpaDay}{\addtocounter{#1}{1}&}
     }
 
-    \Greencells{#2}{#2 (\arabic{#1}) ()} &
+    % \Greencells{#2}{#2 (\arabic{#1}) ()} &
+    \Greencells{#2}{#2 (\arabic{#1}) (\blocksTilNextRest{#1})} &
 }
 
 \NewDocumentCommand{\createGetDay}{m}{
@@ -69,4 +70,23 @@
     \addtocounter{##1}{\number##2}
   }
 }
+
+\NewDocumentCommand{\createBlocksTilNextRest}{m}{
+  \newcouterinit{till_next_rest}
+  \int_new:N \l_till_next_rest
+  \cs_gset:Npn \blocksTilNextRest ##1{
+    \int_gset:Nn \l_till_next_rest {\arabic{##1}}
+  
+    
+    \bool_while_do:nn
+    {
+      \str_compare_p:eNe { \getDay{\number\numexpr\arabic{##1} + \l_till_next_rest\relax} } = { W }
+    }
+    {
+      \int_gset:Nn \l_till_next_rest {\int_eval:n { \l_till_next_rest + 1 }}
+    }
+    \int_use:N \l_till_next_rest
+  }
+}
+
 \ExplSyntaxOff{}

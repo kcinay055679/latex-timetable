@@ -53,6 +53,7 @@
     \\\hline%
     \createGetDay{#4}
     \createTimeslot{#4}
+    \createBlocksTilNextRest{#4}
 }%
 {\end{#1}}
 
@@ -86,11 +87,11 @@
 
 % \addtocounter{currentPlannedHours}{16}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{W R R W}%
+\begin{Timetable}{tabular}{W R W}%
 % \getDay{20}
+\task{a name}{8}{2}
 \task{a name}{8}{5}
-\task{a name}{8}{5}
-\task{a name}{5}{2}
+\task{a name}{4}{2}
 % \task{a name}{2}{2}
 % \task{a name}{8}{5}
 % \task{a name}{8}{5}
