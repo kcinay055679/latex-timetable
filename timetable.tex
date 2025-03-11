@@ -25,6 +25,7 @@
 \usepackage{datenumber}
 
 
+\setlength{\columnsep}{0.5cm}
 
 \setlength\cellspacetoplimit{1ex}
 \setlength\cellspacebottomlimit{1ex}
@@ -53,11 +54,15 @@
 
 \definecolor{Gray}{gray}{0.85}
 
-\newcolumntype{H}{@{}>{\leavevmode\columncolor{Gray}\setbox0=\hbox\bgroup}c<{\egroup}}
-\newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
-\newcolumntype{W}{*{\blockAmountPerIpaDay}{c!{\bluevrule}}}
-\newcolumntype{R}{>{\leavevmode\columncolor{Gray}}c*{\hiddnRestColls}{H}!{\bluevrule}}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+%\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
 
+\newcolumntype{H}{@{}>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
+\newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
+\newcolumntype{W}{*{\blockAmountPerIpaDay}{@{}p{0.5cm}@{}!{\bluevrule}}@{}}
+\newcolumntype{R}{@{}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
 
 \begin{document}
 \setlength\Lstackgap{1cm}
@@ -66,7 +71,7 @@
 \input{vars.tex}
 
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{W R R R W}
+\begin{Timetable}{tabular}{W R R R W R R W}
 \colorBlue
 
 \task{a name}{8}{8}

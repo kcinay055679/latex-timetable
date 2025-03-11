@@ -1,7 +1,7 @@
 \newcommand{\hoursPerDay}{\number8}
 \newcommand{\minutesPerHour}{\number60}
 
-\newcommand{\blockSize}{\number30}
+\newcommand{\blockSize}{\number60}
 \newcommand{\blockAmountPerIpaDay}{\number\numexpr \hoursPerDay * \minutesPerHour / \blockSize\relax}
 \newcommand{\hiddnRestColls}{\number\numexpr \number\blockAmountPerIpaDay -1\relax}
 \newcommand{\blockAmount}{\number\numexpr  \blockAmountPerIpaDay * (\number\theipaDays + \number\therestDays)\relax}
