@@ -12,7 +12,8 @@
 
 \newcommand{\newcouterinit}[2][0]{\newcounter{#2}\setcounter{#2}{#1}}
 
-
+\newcommand{\currentPlannedColor}{34CDF9}
+\newcommand{\currentDoneColor}{145263}
 
 \def\useone#1{#1}
 
@@ -37,7 +38,7 @@
   \\\hline
 }
 
-\newcommand\Greencells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{009901}#2}}
+\newcommand\coloredCell[3]{\multicolumn{#2}{Sc}{\cellcolor[HTML]{\getColor{#1}}#3}}
 \newcommand\Lightbluecells[2]{\multicolumn{#1}{Sc}{\cellcolor[HTML]{34CDF9}#2}}
 \newcommand\emptycells[1]{\Repeat{#1}{& \makecell{}}}
 
