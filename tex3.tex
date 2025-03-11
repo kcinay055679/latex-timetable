@@ -9,8 +9,8 @@
     {
       \str_case:nn {##1}
         {
-          {A}{#2}
-          {H}{#3}
+          {W}{#2}
+          {R}{#3}
         }
     }
 }
@@ -48,13 +48,20 @@
       \emptycells{\arabic{##1}}
     \fi
 
+  % \bool_while_do:nn
+  %   {
+  %     \str_compare_p:eNe { \getDay{\arabic{##1}} } = { R }
+  %   }
+  %   {
+  %     \addtocounter{##1}{16}&
+  %   }
 
     \str_if_eq:eeT
       { \getDay{\arabic{##1}} }
-      { H }
+      { R }
       { \addtocounter{##1}{1}& }
 
-    \Greencells{##2}{##2 (\arabic{##1}) (\getDay{\arabic{##1}})} &
+    \Greencells{##2}{##2 (\arabic{##1}) ()} &
     \emptycells{\numexpr\number\blockAmount-\arabic{##1}- (##2) -1\relax} 
     \addtocounter{##1}{\number##2}
   }
