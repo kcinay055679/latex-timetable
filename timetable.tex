@@ -65,8 +65,7 @@
 
 \newcolumntype{H}{@{}>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
 \newcolumntype{I}{!{\thickvrule}c!{\thickvrule}}
-\newcolumntype{W}{*{\blockAmountPerIpaDay}{@{}p{0.5cm}@{}!{\bluevrule}}@{}}
-%\newcolumntype{R}{@{}>{}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
+\newcolumntype{W}{*{\blockAmountPerIpaDay}{@{}p{0.5cm}@{}!{\bluevrule}}@{}|}
 \newcolumntype{R}{@{}>{\columncolor{Gray}}C{5mm}@{}*{\hiddnRestColls}{H}@{}!{\bluevrule}}
 
 \begin{document}
@@ -74,22 +73,20 @@
 \pagenumbering{gobble}
 
 \input{vars.tex}
-
+%\setcounter{currentPlannedHours}{4}
+%\setcounter{currentDoneHours}{4}
 \begin{table}[]\label{my-label}
-\begin{Timetable}{tabular}{W R R R W R R W}
+\begin{Timetable}{tabular}{W W R R W W R W W R R W W R R W}
+\colorGray
+\task{Keine IPA}{4}{4}
 \colorBlue
-
-\task{Aufgabe 1}{4}{3}
-\task{Aufgabe 2}{8}{2}
+\task{Aufgabe 1}{2}{2}
+\task{Aufgabe 2}{2}{2}
 \colorRed
 \task{a name}{4}{2}
 \task{a name}{4}{2}
 \task{a name}{4}{2}
 \task{a name}{4}{2}
-
-
-
-%&&&&&&&&&&&&&&&&&\multirow{-15}{*}{\rotatebox[origin=l]{90}{Frei am: \datedate}}\multirow{-15}{*}{\rotatebox[origin=l]{90}{Frei am: \datedate}} 
 
 
 \end{Timetable}
