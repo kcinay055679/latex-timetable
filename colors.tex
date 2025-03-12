@@ -1,35 +1,52 @@
 \ExplSyntaxOn{}
-\str_new:N \g_currentPlannedColor
-\str_new:N \g_currentDoneColor
+\str_new:N \g_plannedHoursTimespanColor
+\str_new:N \g_doneHoursTimespanColor
+\str_new:N \g_taskTextColor
+\str_new:N \g_timespanTextColor
 
-\cs_gset:Npn \getColor #1{
+\cs_gset:Npn \getTimespanColor #1{
   \str_case:nn {#1}
     {
-      {currentPlannedHours}{\g_currentPlannedColor}
-      {sprintPlannedHours}{\g_currentPlannedColor}
-      {currentDoneHours}{\g_currentDoneColor}
-      {sprintDoneHours}{\g_currentDoneColor}
+      {currentPlannedHours}{\g_plannedHoursTimespanColor}
+      {sprintPlannedHours}{\g_plannedHoursTimespanColor}
+
+      {currentDoneHours}{\g_doneHoursTimespanColor}
+      {sprintDoneHours}{\g_doneHoursTimespanColor}
     }
 }
 
-\newcommand{\currentPlannedColor}{34CDF9}
-\newcommand{\currentDoneColor}{145263}
+\cs_gset:Npn \getTaskTextColor {
+    \g_taskTextColor
+}
+
+\cs_gset:Npn \getTimeSpanTextColor #1{
+    \str_case:nn {#1}
+    {
+      {currentPlannedHours}{000000}
+      {sprintPlannedHours}{000000}
+
+      {currentDoneHours}{FFFFFF}
+      {sprintDoneHours}{FFFFFF}
+    }
+}
 
 
-\newcommand{\setColor}[2]{
-    \str_gset:Nn \g_currentPlannedColor{#1}
-    \str_gset:Nn \g_currentDoneColor{#2}
+\newcommand{\setColor}[3]{
+    \str_gset:Nn \g_plannedHoursTimespanColor{#1}
+    \str_gset:Nn \g_doneHoursTimespanColor{#2}
+    \str_gset:Nn \g_taskTextColor{#2}
+    \str_gset:Nn \g_timespanTextColor{#2}
 }
 
 \newcommand{\colorRed}{
-    \setColor{FF0000}{880808}
+    \setColor{FF0000}{880808}{FF0000}
 }
 \newcommand{\colorBlue}{
-    \setColor{34CDF9}{145263}
+    \setColor{34CDF9}{145263}{FF0000}
 }
 
 \newcommand{\colorGray}{
-    \setColor{808080}{71797E}
+    \setColor{808080}{71797E}{FF0000}
 }
 
 \ExplSyntaxOff{}

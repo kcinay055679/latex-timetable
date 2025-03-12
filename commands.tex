@@ -24,7 +24,7 @@
 
 
 \newcommand{\ipaDayHeader}[1]{
-  &\multicolumn{\blockAmountPerIpaDay}{|c|}{#1}
+  &\multicolumn{\blockAmountPerIpaDay}{c|}{#1}
 }
 \newcommand{\holidyDayHeader}[1]{
   &
@@ -34,7 +34,7 @@
 
 
 \newcommand{\task}[3]{
-  #1
+  \taskText{#1}
   \timeslot{currentPlannedHours}{#2}
   \addtocounter{sprintPlannedHours}{#2}
   \\
@@ -54,15 +54,22 @@
   \setcounter{sprintDoneHours}{0}
 }
 
+
+
 \newcommand{\EndSprint}[1]{
-  #1
+  \taskText{#1}
   \sprint{sprintPlannedHoursBase}{sprintPlannedHours}
   \\
   \sprint{sprintDoneHoursBase}{sprintDoneHours}
   \\\hline
 }
 
-\newcommand\coloredCell[3]{\multicolumn{#2}{Sc}{\cellcolor[HTML]{\getColor{#1}}#3}}
+\newcommand{\taskText}[1]{
+  \textcolor[HTML]{\getTaskTextColor}{#1}
+  
+}
+
+\newcommand\coloredCell[3]{\multicolumn{#2}{Sc}{\cellcolor[HTML]{\getTimespanColor{#1}}\textcolor[HTML]{\getTimeSpanTextColor{#1}}{#3}}}
 \newcommand\emptycells[1]{\Repeat{#1}{& \makecell{}}}
 
 
