@@ -77,18 +77,23 @@
       \emptycells{\arabic{##1}}
     }
 
-    \int_do_until:nNnn {\g_drawn_slots} = {\g_slots_to_draw} {
+    \int_while_do:nn {\g_drawn_slots != \g_slots_to_draw} {
       \blocksTilNextRest{##1}
-      \int_compare:nTF {\g_slots_to_draw > \g_till_next_rest}
+      \bool_if:nTF {\int_compare_p:n {\g_slots_to_draw > \g_till_next_rest } && \int_compare_p:n{\g_till_next_rest != 0}} 
       {
         \int_gset:Nn\g_slots_to_be_drawn{\int_eval:n{\g_slots_to_draw -(\g_slots_to_draw -\g_till_next_rest)}}
-        %\int_use:N\g_slots_to_be_drawn
         \timeslotItem{##1}{\expandafter\int_use:N \g_slots_to_be_drawn}{##2}
+
         \int_gset:Nn\g_slots_to_draw{\int_eval:n{\g_slots_to_draw -\g_slots_to_be_drawn}}
+
+        %(2slots_to_draw: \int_use:N \g_slots_to_draw)
+        %(2slots_to_be_drawn: \int_use:N \g_slots_to_be_drawn)
+        %(2till_next_rest: \int_use:N \g_till_next_rest)
       }
       {
         \timeslotItem{##1}{\expandafter\int_use:N \g_slots_to_draw}{##2}
-        \int_gzero:N\g_slots_to_draw
+        \int_gset:Nn\g_slots_to_draw{0}
+        \int_gset:Nn\g_slots_to_be_drawn{0}
       }
     }
 
@@ -109,8 +114,6 @@
     {
       \int_gset:Nn \g_till_next_rest {\int_eval:n { \g_till_next_rest + 1 }}
     }
-    %\int_gset:Nn \g_till_next_rest {\int_eval:n { \g_till_next_rest - 1 }}
-
   }
 }
 
