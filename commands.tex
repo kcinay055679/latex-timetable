@@ -36,8 +36,29 @@
 \newcommand{\task}[3]{
   #1
   \timeslot{currentPlannedHours}{#2}
+  \addtocounter{sprintPlannedHours}{#2}
   \\
   \timeslot{currentDoneHours}{#3}
+  \addtocounter{sprintDoneHours}{#3}
+  \\\hline
+}
+
+\newcommand{\sprint}[2]{
+ \timeslot{#2}{\arabic{#1}}
+}
+
+\newcommand{\StartSprint}{
+  \setcounter{sprintPlannedHoursBase}{\arabic{currentPlannedHours}}
+  \setcounter{sprintDoneHoursBase}{\arabic{currentDoneHours}}
+  \setcounter{sprintPlannedHours}{0}
+  \setcounter{sprintDoneHours}{0}
+}
+
+\newcommand{\EndSprint}[1]{
+  #1
+  \sprint{sprintPlannedHoursBase}{sprintPlannedHours}
+  \\
+  \sprint{sprintDoneHoursBase}{sprintDoneHours}
   \\\hline
 }
 
