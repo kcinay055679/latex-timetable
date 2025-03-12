@@ -52,7 +52,9 @@
     \createTimeslot{#4}
     \createBlocksTilNextRest{#4}
 }%
-{\end{#1}}
+{
+    \endTable{#4}
+\end{#1}}
 
 \definecolor{Gray}{gray}{0.85}
 
@@ -86,8 +88,8 @@
 \task{a name}{4}{2}
 
 
-%\endTable
-&&&&&&&&&&&&&&&&&\multirow{-15}{*}{\rotatebox[origin=l]{90}{Frei am: \datedate}} 
+
+%&&&&&&&&&&&&&&&&&\multirow{-15}{*}{\rotatebox[origin=l]{90}{Frei am: \datedate}}\multirow{-15}{*}{\rotatebox[origin=l]{90}{Frei am: \datedate}} 
 
 
 \end{Timetable}

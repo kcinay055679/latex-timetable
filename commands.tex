@@ -26,12 +26,9 @@
 \newcommand{\ipaDayHeader}[1]{
   &\multicolumn{\blockAmountPerIpaDay}{|c|}{#1}
 }
-\newcommand{\holidyDayHeader}{
-  & 
-  %\cellcolor{Gray}
-  %Frei 
-  %\multirowthead{10}{L\\ U\\ N\\ C\\ H}
-
+\newcommand{\holidyDayHeader}[1]{
+  &
+  #1
   \insertRestDaySpace 
 }
 

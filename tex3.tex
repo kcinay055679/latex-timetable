@@ -34,6 +34,11 @@
   \runForDays{#1}{\addIpaDay}{\addRestDay}
 }
 
+\cs_gset:Npn \endTable #1
+{
+  \runForDays{#1}{\nextdate\ipaDayHeader{}}{\holidyDayHeader{\multirow{-20}{*}{\rotatebox[origin=l]{90}{Frei:\space \datedate}}}\nextdate}
+}
+
 \cs_gset:Npn \getDayIndex #1
 {
   \int_div_truncate:nn {#1}{\blockAmountPerIpaDay} + 1
