@@ -54,7 +54,7 @@
       \str_compare_p:eNe { \getDay{\arabic{#1}} } = { R }
     }
     {
-      \Repeat{\blockAmountPerIpaDay}{\addtocounter{#1}{1}&\cellcolor{Gray}}
+      \Repeat{\blockAmountPerIpaDay}{\addtocounter{#1}{1}&}
     }
 
     &\coloredCell{#1}{#2}{#3}
@@ -84,6 +84,7 @@
       \int_compare:nTF {\g_slots_to_draw > \g_till_next_rest}
       {
         \int_gset:Nn\g_slots_to_be_drawn{\int_eval:n{\g_slots_to_draw -(\g_slots_to_draw -\g_till_next_rest)}}
+        \int_use:N\g_slots_to_be_drawn
         \timeslotItem{##1}{\expandafter\int_use:N \g_slots_to_be_drawn}{##2}
         \int_gset:Nn\g_slots_to_draw{\int_eval:n{\g_slots_to_draw -\g_slots_to_be_drawn}}
       }
