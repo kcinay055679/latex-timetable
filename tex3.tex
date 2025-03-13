@@ -73,7 +73,7 @@
   \int_gzero_new:N \g_slots_to_be_drawn
   \cs_gset:Npn \timeslot ##1##2{
     \int_gset:Nn\g_slots_to_draw{\number##2}%
-    \int_compare:nNnT {\arabic{##1}} > {0} {
+    \int_compare:nNnT {\expandafter\arabic{##1}} > {0} {
       \emptycells{\arabic{##1}}
     }
 
@@ -85,10 +85,6 @@
         \timeslotItem{##1}{\expandafter\int_use:N \g_slots_to_be_drawn}{##2}
 
         \int_gset:Nn\g_slots_to_draw{\int_eval:n{\g_slots_to_draw -\g_slots_to_be_drawn}}
-
-        %(2slots_to_draw: \int_use:N \g_slots_to_draw)
-        %(2slots_to_be_drawn: \int_use:N \g_slots_to_be_drawn)
-        %(2till_next_rest: \int_use:N \g_till_next_rest)
       }
       {
         \timeslotItem{##1}{\expandafter\int_use:N \g_slots_to_draw}{##2}
